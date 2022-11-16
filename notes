@@ -1,0 +1,15 @@
+- started working by following this tutorial: https://www.youtube.com/watch?v=J01rYl9T3BU&ab_channel=freeCodeCamp.org
+
+- installed PostreSQL on my laptop from https://www.postgresql.org/download/
+- created basic db structure; don't know yet how to create the db itself automatically with PostgreSQL
+- created basic server configuration:
+	- installed node for backend (npm init)
+	- installed express (npm install express) for backend
+	- installed dotenv (npm install dotenv) for backend, in order to be able to use environment variables (https://www.npmjs.com/package/dotenv - usage instructions are here, but also in the tutorial)
+	- install nodemon to automatically monitor any changes in server.js (npm install nodemon)
+- make a test home page on localhost with mock data in json format
+- make a test signup page on localhost with mock data in json format
+- make a test page for finding one specific user on localhost with mock data in json format
+- make a put request for modifying user's data
+- make a delete request for deleteing a user
+- add middleware express.json() in order to save the data sent in post request into "body" & convert it to JS object
