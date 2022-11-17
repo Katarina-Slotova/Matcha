@@ -18,3 +18,11 @@
 - then just follow the usage instructions here: https://node-postgres.com/guides/async-express
 - instructions on connecting (use either hardcoded values or use env variables; prefered way is using env variables): https://node-postgres.com/features/connecting
 - modified requests in server.js, so that they match syntax for postgres queries
+
+- started client-side by creating basic React setup
+- added Bootstrap for styling: https://getbootstrap.com/docs/5.2/getting-started/introduction/
+- added FontAwesome for icons: https://cdnjs.com/libraries/font-awesome (copied the first link)
+- install react router (npm install react-router-dom)
+- install react-bootstrap (npm install react-bootstrap)
+- install react-router-bootstrap (npm install react-router-bootstrap)
+- installed also fontawesome for icons, but for some reason the icons don't show up (instructions here: https://fontawesome.com/docs/web/use-with/react/)
