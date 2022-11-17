@@ -13,3 +13,8 @@
 - make a put request for modifying user's data
 - make a delete request for deleteing a user
 - add middleware express.json() in order to save the data sent in post request into "body" & convert it to JS object
+
+- install node-postgres library that enables connecting to postgres db (npm install pg)
+- then just follow the usage instructions here: https://node-postgres.com/guides/async-express
+- instructions on connecting (use either hardcoded values or use env variables; prefered way is using env variables): https://node-postgres.com/features/connecting
+- modified requests in server.js, so that they match syntax for postgres queries
