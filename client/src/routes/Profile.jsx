@@ -1,7 +1,6 @@
 import React from "react"
 import NavigationBar from "../components/Navbar"
 
-
 const Profile = () => {
 	return (
 		<div>
