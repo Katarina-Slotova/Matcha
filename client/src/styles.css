@@ -1,0 +1,19 @@
+.landing-heading {
+	font-family: 'Lobster', cursive;
+	font-size: 6vw;
+	text-align: center;
+	margin-bottom: 10vw;
+}
+
+@media (max-width:1100px){
+	.img-landing{
+		display: none;
+	}
+}
+
+/*responsive design for small screens*/
+@media (max-width:500px){
+	.img-landing{
+		display: none;
+	}
+}

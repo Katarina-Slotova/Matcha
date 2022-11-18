@@ -1,7 +1,7 @@
 import React from "react"
 import NavigationBar from "../components/Navbar"
 
-const UserSettings = () => {
+const Matches = () => {
 	return (
 		<div>
 			<NavigationBar />
@@ -9,4 +9,4 @@ const UserSettings = () => {
 	)
 }
 
-export default UserSettings
+export default Matches
