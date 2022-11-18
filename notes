@@ -1,6 +1,7 @@
 - started working by following this tutorial: https://www.youtube.com/watch?v=J01rYl9T3BU&ab_channel=freeCodeCamp.org
 
 - installed PostreSQL on my laptop from https://www.postgresql.org/download/
+- install POSTRGES ON SCHOOL'S MAC with BREW: https://wiki.postgresql.org/wiki/Homebrew 
 - created basic db structure; don't know yet how to create the db itself automatically with PostgreSQL
 - created basic server configuration:
 	- installed node for backend (npm init)
