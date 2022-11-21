@@ -2,14 +2,15 @@
 CREATE TABLE IF NOT EXISTS users (
 	id BIGSERIAL NOT NULL PRIMARY KEY, 
 	firstname VARCHAR(1000) NOT NULL,
-	surname VARCHAR(1000) NOT NULL, 
+	lastname VARCHAR(1000) NOT NULL, 
 	username VARCHAR(1000) NOT NULL,
 	image TEXT DEFAULT 'none',
 	age INT(11) NOT NULL,
 	gender VARCHAR(1000) NOT NULL,
-	sexual_orient VARCHAR(1000) DEFAULT 'bisexual',
+	sexual_orient VARCHAR(1000) NOT NULL,
 	bio VARCHAR(1000),
-	location VARCHAR(1000),
+	city VARCHAR(1000),
+	country VARCHAR(1000),
 	actual_location /* complete this */
 	password VARCHAR(1000) NOT NULL,
 	email VARCHAR(1000), 
