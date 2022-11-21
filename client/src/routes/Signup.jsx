@@ -121,7 +121,7 @@ const Signup = () => {
 										</div>
 
 										<div class="mt-4 pt-2">
-											<input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+											<input class="col btn btn-purple-moon btn-lg" type="submit" value="Submit" />
 										</div>
 									</Form>
 								</div>

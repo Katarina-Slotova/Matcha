@@ -1,7 +1,7 @@
 import React from "react"
 import Footer from "../components/Footer"
 import { useNavigate } from "react-router-dom"
-import { Form, FormControl, FormLabel } from "react-bootstrap"
+import { Form, FormControl, FormGroup, FormLabel } from "react-bootstrap"
 
 const Login = () => {
 	const navigate = useNavigate()
@@ -26,32 +26,25 @@ const Login = () => {
 									<Form onSubmit={onSubmit}>
 										<div class="row">
 											<div class="col-md-6 mb-4">
-												<div class="form-outline">
-													<FormControl type="text" id="firstName" class="form-control form-control-lg" required/>
-													<FormLabel class="form-label" for="firstName">Username</FormLabel>
-												</div>
+												<FormControl type="text" id="firstName" class="form-control form-control-lg" required/>
+												<FormLabel class="form-label" for="firstName">Username</FormLabel>
 											</div>
 
 											<div class="col-md-6 mb-4">
-												<div class="form-outline">
-													<FormControl type="email" id="lastName" class="form-control form-control-lg" required/>
-													<FormLabel class="form-label" for="lastName">Email</FormLabel>
-												</div>
+												<FormControl type="email" id="lastName" class="form-control form-control-lg" required/>
+												<FormLabel class="form-label" for="lastName">Email</FormLabel>
 											</div>
 										</div>
 
-
 										<div class="row">
 											<div class="col-md-6 mb-4">
-												<div class="form-outline">
-													<FormControl type="password" id="firstName" class="form-control form-control-lg" required/>
-													<FormLabel class="form-label" for="firstName">Password</FormLabel>
-												</div>
+												<FormControl type="password" id="firstName" class="form-control form-control-lg" required/>
+												<FormLabel class="form-label" for="firstName">Password</FormLabel>
 											</div>
 										</div>
 
 										<div class="mt-4 pt-2">
-											<input class="btn btn-primary btn-lg" type="submit" value="Login" />
+											<input class="col btn btn-purple-moon btn-lg" type="submit" value="Login" />
 										</div>
 									</Form>
 								</div>
