@@ -27,3 +27,10 @@
 - install react-bootstrap (npm install react-bootstrap)
 - install react-router-bootstrap (npm install react-router-bootstrap)
 - installed also fontawesome for icons, but for some reason the icons don't show up (instructions here: https://fontawesome.com/docs/web/use-with/react/)
+
+- created login page
+- created signup page
+- linked submit buttons on both pages to redirect to home
+- fixed navbar so that it showes notifications icon and it has a dropdown menu
+- changed styling of: buttons, login, signup
+- add footer
