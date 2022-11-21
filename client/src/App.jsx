@@ -7,6 +7,7 @@ import Profile from "./routes/Profile"
 import UserSettings from "./routes/UserSettings"
 import Login from "./routes/Login"
 import Signup from "./routes/Signup"
+import './styles.css'
 
 const App = () => {
 	return (

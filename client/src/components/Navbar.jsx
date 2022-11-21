@@ -1,7 +1,7 @@
 import React from "react"
-import { Container, Nav, Navbar, Button, Form } from "react-bootstrap"
+import { Container, Nav, Navbar, Button, Form, NavDropdown } from "react-bootstrap"
 import { LinkContainer } from "react-router-bootstrap"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const NavigationBar = () => {
 	return (
@@ -10,7 +10,7 @@ const NavigationBar = () => {
 				<Container fluid>
 					<Navbar.Brand><a href="/home"><img src="matcha-logo-dark.png" width="30" height="30" className="d-inline-block align-top" alt="matcha-logo"></img></a></Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav"/>
-					<Navbar.Collapse id="basic-navbar-nav">
+					<Navbar.Collapse>
 						<Nav className="m-auto d-flex align-items-center w-100">
 							<LinkContainer to="/home">
 								<Nav.Link>Home</Nav.Link>
@@ -24,15 +24,23 @@ const NavigationBar = () => {
 							<LinkContainer to="/settings">
 								<Nav.Link>Settings</Nav.Link>
 							</LinkContainer>
-							<Nav.Item className="ms-md-auto d-none d-md-block">
-								<FontAwesomeIcon icon="fa-duotone fa-bell" />
-							</Nav.Item>
+							<NavDropdown title={<i class="fas fa-bell"></i>} menuVariant="dark">
+								<NavDropdown.Item class="dropdown-item text-wrap" target="_blank" rel="nofollow">
+									<p class="small text-uppercase mb-2">21/11/2022</p>
+									<p>You have a new match!</p>
+								</NavDropdown.Item>
+								<NavDropdown.Item class="dropdown-item text-wrap" target="_blank" rel="nofollow">
+									<p class="small text-uppercase mb-2">21/11/2022</p>
+									<p>You have a new match!</p>
+								</NavDropdown.Item>
+							</NavDropdown>
+							<Nav.Item className="ms-md-auto d-none d-md-block"></Nav.Item>
 							<Form className="mx-3 d-flex">
 								<Form.Control type="search" placeholder="Search" className="me-2" aria-label="Search" />
-								<Button variant="outline-info">Search</Button>
+								<Button className="col btn btn-pink-moon">Search</Button>
 							</Form>
 							<Nav.Item className="mx-3 d-none d-md-block">
-								<Navbar.Text className="fs-6">User's Name Here</Navbar.Text>
+								<Navbar.Text className="fs-6">Ferocious Cupcake</Navbar.Text>
 							</Nav.Item>
 							<Button size="sm" variant="secondary" onClick={"#"}>
 								Log out
@@ -46,3 +54,7 @@ const NavigationBar = () => {
 }
 
 export default NavigationBar
+
+{/* <Nav.Item>
+<span id="navbarNotificationCounter" class="badge rounded-pill badge-notification bg-danger" alt="Notifications" style={{color: "rgb(255, 255, 255) !important;"}}>2</span>
+</Nav.Item> */}

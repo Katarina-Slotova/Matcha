@@ -1,3 +1,15 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.App {
+	font-family: sans-serif;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
 .landing-heading {
 	font-family: 'Lobster', cursive;
 	font-size: 6vw;
@@ -16,4 +28,63 @@
 	.img-landing{
 		display: none;
 	}
+}
+
+.gradient-custom {
+	/* fallback for old browsers */
+	background: #f093fb;
+	
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+	
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1))
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+	font-size: 1rem;
+	line-height: 2.15;
+	padding-left: .75em;
+	padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+	top: 13px;
+}
+
+.btn-pink-moon {
+	background: #ec008c;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #fc6767, #ec008c);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #fc6767, #ec008c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: #fff;
+	border: 3px solid #eee;
+}
+
+.btn-purple-moon {
+	background: #4e54c8;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #8f94fb, #4e54c8);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #8f94fb, #4e54c8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: #fff;
+	border: 3px solid #eee;
+}
+
+.badge {
+	position: absolute;
+	font-size: .6rem;
+	margin-top: -0.1rem;
+	margin-left: -0.5rem;
+	padding: 0.2em 0.45em;
+}
+
+
+footer {
+	font-family: 'Lobster', cursive;
+	background-color: gray;
+	text-align: center;
+	margin-top: auto;
+	padding: 8px;
+	position:absolute;
+	left:0;
+	bottom:0;
+	right:0;
 }
