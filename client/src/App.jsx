@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import Home from "./routes/Home"
 import Landing from "./routes/Landing"
@@ -10,6 +10,17 @@ import Signup from "./routes/Signup"
 import './styles.css'
 
 const App = () => {
+	const [user, setUser] = useState(null)
+	const [message, setMessage] = useState(null)
+
+	const login = (user) => {
+		setUser(user)
+		setMessage(`welcome ${user}`)
+		setTimeout(() => {
+			setMessage(null)
+		}, 5000)
+	}
+
 	return (
 		<div>
 			<Router>
@@ -19,7 +30,7 @@ const App = () => {
 					<Route path="/matches" element={<Matches />}></Route>
 					<Route path="/profile" element={<Profile />}></Route>
 					<Route path="/settings" element={<UserSettings />}></Route>
-					<Route path="/login" element={<Login />}></Route>
+					<Route path="/login" element={<Login onLogin={login}/>}></Route>
 					<Route path="/signup" element={<Signup />}></Route>
 				</Routes>
 			</Router>

@@ -1,7 +1,18 @@
 import React from "react"
 import Footer from "../components/Footer"
+import { useNavigate } from "react-router-dom"
+import { Form, FormControl, FormLabel } from "react-bootstrap"
 
-const loginUser = () => {
+const Login = () => {
+	const navigate = useNavigate()
+
+	const onSubmit = (event) => {
+		event.preventDefault()
+		//props.onLogin('mluukkai')
+		/* calling navigate('/') causes the browser's url to change to / and the application renders the corresponding component Home */
+		navigate('/home')
+	}
+
 	return (
 		<div class="gradient-custom">
 			<h1 class="text-light landing-heading">Log in to your account</h1>
@@ -12,19 +23,19 @@ const loginUser = () => {
 							<div class="card shadow-2-strong card-registration">
 								<div class="card-body p-4 p-md-5">
 									<h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Login Form</h3>
-									<form action="">
+									<Form onSubmit={onSubmit}>
 										<div class="row">
 											<div class="col-md-6 mb-4">
 												<div class="form-outline">
-													<input type="text" id="firstName" class="form-control form-control-lg" required/>
-													<label class="form-label" for="firstName">Username</label>
+													<FormControl type="text" id="firstName" class="form-control form-control-lg" required/>
+													<FormLabel class="form-label" for="firstName">Username</FormLabel>
 												</div>
 											</div>
 
 											<div class="col-md-6 mb-4">
 												<div class="form-outline">
-													<input type="text" id="lastName" class="form-control form-control-lg" required/>
-													<label class="form-label" for="lastName">Email</label>
+													<FormControl type="email" id="lastName" class="form-control form-control-lg" required/>
+													<FormLabel class="form-label" for="lastName">Email</FormLabel>
 												</div>
 											</div>
 										</div>
@@ -33,8 +44,8 @@ const loginUser = () => {
 										<div class="row">
 											<div class="col-md-6 mb-4">
 												<div class="form-outline">
-													<input type="text" id="firstName" class="form-control form-control-lg" required/>
-													<label class="form-label" for="firstName">Password</label>
+													<FormControl type="password" id="firstName" class="form-control form-control-lg" required/>
+													<FormLabel class="form-label" for="firstName">Password</FormLabel>
 												</div>
 											</div>
 										</div>
@@ -42,7 +53,7 @@ const loginUser = () => {
 										<div class="mt-4 pt-2">
 											<input class="btn btn-primary btn-lg" type="submit" value="Login" />
 										</div>
-									</form>
+									</Form>
 								</div>
 							</div>
 						</div>
@@ -54,4 +65,4 @@ const loginUser = () => {
 	)
 }
 
-export default loginUser
+export default Login
