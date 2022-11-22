@@ -34,3 +34,8 @@
 - fixed navbar so that it showes notifications icon and it has a dropdown menu
 - changed styling of: buttons, login, signup
 - add footer
+
+- add user card to home page
+- add link to user name so that it takes you to a profile page
+- link login and signup buttons so that they navigate from landing page to respective pages
+- slightly modified db structure in accordance with Matcha subject
