@@ -1,7 +1,15 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const db = require('./db')
+
+// we need to use cors middleware in order for our server and client side to be able to communicate properly
+// client and server is each running on its own domain 
+// having a different port means it is already a different domain and two domains cannot communicate by default
+// that prevents passing requests from client to server
+// cors middleware fixes this problem
+app.use(cors())
 
 // use this middleware in order to have access to body & convert the data sent in the request itnto a JS object
 app.use(express.json())
