@@ -7,6 +7,7 @@ import Profile from "./routes/Profile"
 import UserSettings from "./routes/UserSettings"
 import Login from "./routes/Login"
 import Signup from "./routes/Signup"
+import { UsersContextProvider } from './context/UsersContext'
 import './styles.css'
 
 const App = () => {
@@ -22,19 +23,21 @@ const App = () => {
 	}
 
 	return (
-		<div>
-			<Router>
-				<Routes>
-					<Route path="/" element={<Landing />}></Route>
-					<Route path="/home" element={<Home />}></Route>
-					<Route path="/matches" element={<Matches />}></Route>
-					<Route path="/profile" element={<Profile />}></Route>
-					<Route path="/settings" element={<UserSettings />}></Route>
-					<Route path="/login" element={<Login onLogin={login}/>}></Route>
-					<Route path="/signup" element={<Signup />}></Route>
-				</Routes>
-			</Router>
-		</div>
+		<UsersContextProvider>
+			<div>
+				<Router>
+					<Routes>
+						<Route path="/" element={<Landing />}></Route>
+						<Route path="/home" element={<Home />}></Route>
+						<Route path="/matches" element={<Matches />}></Route>
+						<Route path="/profile" element={<Profile />}></Route>
+						<Route path="/settings" element={<UserSettings />}></Route>
+						<Route path="/login" element={<Login onLogin={login}/>}></Route>
+						<Route path="/signup" element={<Signup />}></Route>
+					</Routes>
+				</Router>
+			</div>
+		</UsersContextProvider>
 	)
 }
 
