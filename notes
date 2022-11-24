@@ -39,4 +39,8 @@
 - add link to user name so that it takes you to a profile page
 - link login and signup buttons so that they navigate from landing page to respective pages
 - slightly modified db structure in accordance with Matcha subject
-- removed search filed on home page; instead, the plan is to create a separate search page with advanced search options (according to the subject)
+- removed search field on home page; instead, the plan is to create a separate search page with advanced search options (according to the subject)
+
+- created context for the list of users
+- installed axios (npm install axios)
+- installed cors (npm install cors)
