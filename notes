@@ -1,7 +1,16 @@
 - started working by following this tutorial: https://www.youtube.com/watch?v=J01rYl9T3BU&ab_channel=freeCodeCamp.org
 
 - installed PostreSQL on my laptop from https://www.postgresql.org/download/
-- install POSTRGES ON SCHOOL'S MAC with BREW: https://wiki.postgresql.org/wiki/Homebrew 
+- install POSTRGES ON SCHOOL'S MAC with BREW: https://wiki.postgresql.org/wiki/Homebrew
+- BASIC POSTGRES COMMANDS (useful source to learn about postgres: https://www.postgresqltutorial.com/):
+	- list all the databases: \l
+	- create db: CREATE DATABASE name_of_db;
+	- connect to db: \c name_of_db;
+	- list all the tables in db: \d
+	- see the columns of specific table: \d name_of_table;
+	- modify a table by adding a column: ALTER TABLE name_of_table ADD COLUMN name_of_new_column data_type;
+	- modify a table by removing a column: ALTER TABLE name_of_table DROP COLUMN name_of_new_column;
+ 
 - created basic db structure; don't know yet how to create the db itself automatically with PostgreSQL
 - created basic server configuration:
 	- installed node for backend (npm init)
