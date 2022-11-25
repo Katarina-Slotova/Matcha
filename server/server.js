@@ -94,7 +94,7 @@ app.get("/users/:id", async (req, res) => {
 app.post("/signup", async (req, res) => {
 	console.log(req.body)
 	try {
-		const results = await db.query("INSERT INTO users (firstname, surname, username, email, password, image, age, gender, sexual_orient, bio, location) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning *", 
+		const results = await db.query("INSERT INTO users (firstname, lastname, username, email, city, country, password, image, age, gender, bio) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning *", // change the token in the Table to null for now, before we assign an actual automatically generated token
 		[ 
 			req.body.firstname, req.body.surname, req.body.username, req.body.email, req.body.password, req.body.image, req.body.age, req.body.gender, req.body.sexual_orient, req.body.bio, req.body.location
 		])
@@ -112,13 +112,11 @@ app.post("/signup", async (req, res) => {
 				image: 'cupcake.jpg',
 				age: "18",
 				gender: "cupcake",
-				sexual_orient: 'bisexual',
-				bio: "too sweet to handle",
-				location: "your local bakery",
-				actual_location: "your wildest dreams",
-				active: 1,
-				token: "sdjfvvfhsjlslslslsdls",
-				popularity: 123456789
+				location: "your local bakery"
+/* 				actual_location: "your wildest dreams",
+				token: "sdjfvvfhsjlslslslsdls", 
+				INSERT INTO users (id, firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES (1, 'Ferocious', 'Cupcake', 'SweetNSour', 'wishfor@cupcake.io', 'Bakeria', 'Wonderland', 'eat_your_veggies_I_mean_cupcakes', 'cupcake.jpg', 18, 'cupcake', 'too sweet to handle', 'kzsgdfksvzvbd');
+*/
 			}
 		})
 	} catch (err) {
