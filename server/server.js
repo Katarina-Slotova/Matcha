@@ -21,15 +21,15 @@ app.get("/home", async (req, res) => {
 		console.log(results)
 		res.status(200).json({
 			status: "success",
-			// results: results.rows.length,
+			 results: results.rows.length,
 			// structure response to the frontend using "data" -- frontend knows to look for "data" field in the payload, where all the data is stored 
 			data: {
-				// results: results.rows,
-				users: [
+				results: results.rows,
+				/* users: [
 					{
 						id: 1,
 						firstname: "Kata",
-						surname: "Mata", 
+						lastname: "Mata", 
 						username: "SuperUser",
 						image: 'hedgehog.jpg',
 						age: "2236",
@@ -41,7 +41,7 @@ app.get("/home", async (req, res) => {
 					{
 						id: 2,
 						firstname: "Bobo",
-						surname: "Robo", 
+						lastname: "Robo", 
 						username: "LesserUser",
 						image: 'snake.jpg',
 						age: "12",
@@ -50,7 +50,7 @@ app.get("/home", async (req, res) => {
 						bio: "super scared of badass killer hedgehog",
 						location: "your local forest",
 					}
-				]
+				] */
 			},
 		})
 	} catch (err) {
@@ -67,12 +67,13 @@ app.get("/users/:id", async (req, res) => {
 		//console.log(user.rows[0])
 		res.status(200).json({
 			status: "success",
-			data: [
-				// user: results.rows[0]
-				{
+			data: {
+				user: results.rows[0]
+			}
+				/* {
 					id: 2,
 					firstname: "Bobo",
-					surname: "Robo", 
+					lastname: "Robo", 
 					username: "LesserUser",
 					image: 'snake.jpg',
 					age: "12",
@@ -80,8 +81,7 @@ app.get("/users/:id", async (req, res) => {
 					sexual_orient: 'bisexual',
 					bio: "super scared of badass killer hedgehog",
 					location: "your local forest",
-				}
-			]
+				} */
 		})
 	} catch (err) {
 		console.log(err)
@@ -94,29 +94,30 @@ app.get("/users/:id", async (req, res) => {
 app.post("/signup", async (req, res) => {
 	console.log(req.body)
 	try {
-		const results = await db.query("INSERT INTO users (firstname, lastname, username, email, city, country, password, image, age, gender, bio) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning *", // change the token in the Table to null for now, before we assign an actual automatically generated token
+		const results = await db.query("INSERT INTO users (firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) returning *", // changed the token in the Table to null for now, before we assign an actual automatically generated token
 		[ 
-			req.body.firstname, req.body.surname, req.body.username, req.body.email, req.body.password, req.body.image, req.body.age, req.body.gender, req.body.sexual_orient, req.body.bio, req.body.location
+			req.body.firstname, req.body.lastname, req.body.username, req.body.email, req.body.city, req.body.country, req.body.password, req.body.image, req.body.age, req.body.gender, req.body.bio, req.body.token,
 		])
 		console.log(results)
 		res.status(201).json({
 			status: "success",
 			data: {
-				// user: results.rows[0]
-				id: 3,
-				firstname: "Ferocious",
-				surname: "Cupcake", 
+				user: results.rows[0]
+/* 				firstname: "Ferocious",
+				lastname: "Cupcake", 
 				username: "SweetNSour",
 				email: "wishfor@cupcake.io", 
 				password: "eat_your_veggies_I_mean_cupcakes",
 				image: 'cupcake.jpg',
 				age: "18",
 				gender: "cupcake",
-				location: "your local bakery"
+				location: "your local bakery" */
 /* 				actual_location: "your wildest dreams",
 				token: "sdjfvvfhsjlslslslsdls", 
 				INSERT INTO users (id, firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES (1, 'Ferocious', 'Cupcake', 'SweetNSour', 'wishfor@cupcake.io', 'Bakeria', 'Wonderland', 'eat_your_veggies_I_mean_cupcakes', 'cupcake.jpg', 18, 'cupcake', 'too sweet to handle', 'kzsgdfksvzvbd');
-*/
+				INSERT INTO users (id, firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES (2, 'Kata', 'Mata', 'UltimateHedgehog', 'hedge@hog.io', 'Local Forest', 'Wonderland', 'do_not_piss_hedges_off', 'hedgehog.jpg', 12, 'hedgehog', 'best hedgehog ever', 'kzsgdfksvzvbd');
+				INSERT INTO users (id, firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES (3, 'Bobo', 'Robo', 'RattleSnake', 'rattle@snake.io', 'extinct, slaughtered by badass hedgehog', 'Wonderland', 'ban_all_hedgehogs', 'snake.jpg', 12, 'snake', 'super scared of badass killer hedgehog', 'kzsgdfksvzvbd');
+				*/
 			}
 		})
 	} catch (err) {
@@ -128,16 +129,16 @@ app.put("/users/:id", async (req, res) => {
 	console.log(req.params.id)
 	console.log(req.body)
 	try {
-		const results = await db.query("INSERT INTO users SET firstname = $1, surname = $2, username = $3, email = $4, password = $5, image = $6, age = $7, gender = $8, sexual_orient = $9, bio = $10, location = $11 WHERE id = $12 returning *", [
-			req.body.firstname, req.body.surname, req.body.username, req.body.email, req.body.password, req.body.image, req.body.age, req.body.gender, req.body.sexual_orient, req.body.bio, req.body.location, req.body.id
+		const results = await db.query("UPDATE users SET firstname = $1, lastname = $2, username = $3, email = $4, city = $5, country = $6, password = $7, image = $8, age = $9, gender = $10, bio = $11 WHERE id = $12 returning *", [
+			req.body.firstname, req.body.lastname, req.body.username, req.body.email, req.body.city, req.body.country, req.body.password, req.body.image, req.body.age, req.body.gender, req.body.bio, req.params.id
 		])
 		console.log(results)
 		res.status(200).json({
 			status: "success",
 			data: {
-				// user: results.rows[0]
-				firstname: "Bobo",
-				surname: "Robo", 
+				user: results.rows[0]
+/* 				firstname: "Bobo",
+				lastname: "Robo", 
 				username: "LesserUser",
 				email: "scaredof@cupcake.io", 
 				password: "ban_all_cupcakes",
@@ -146,7 +147,7 @@ app.put("/users/:id", async (req, res) => {
 				gender: "snake",
 				sexual_orient: 'bisexual',
 				bio: "super scared of badass killer hedgehog",
-				location: "extinct, slaughtered by badass hedgehog",
+				location: "extinct, slaughtered by badass hedgehog", */
 			}
 		})
 	} catch (err) {
