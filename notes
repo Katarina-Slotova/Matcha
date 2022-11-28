@@ -53,3 +53,37 @@
 - created context for the list of users
 - installed axios (npm install axios)
 - installed cors (npm install cors)
+
+Put these into postman at aschool for testing purposes
+1. Create a fet request fro getting all the users: http://localhost:3005/home
+2. Create a get request to get one user: http://localhost:3005/users/2
+3. Create a post request to create a user: http://localhost:3005/signup
+{
+    "firstname": "Fast",
+    "lastname": "Sloth",
+    "username": "ChillinChiller",
+    "email": "sloth@chill.io",
+    "city": "Zootropolis",
+    "country": "Wonderland",
+    "password": "chill_the_heck_out",
+    "image": "sloth.jpg",
+    "age": "99",
+    "gender": "sloth",
+    "bio": "too fast to handle",
+    "token": "sdjfvvfhsjlslslslsdls"
+}
+4. Create a out request to modify user info:
+{
+    "firstname": "Fast",
+    "lastname": "Sloth",
+    "username": "ChillinChiller",
+    "email": "sloth@chill.io",
+    "city": "Zootropolis",
+    "country": "Wonderland",
+    "password": "chill_the_heck_out",
+    "image": "sloth.jpg",
+    "age": "100",
+    "gender": "sloth",
+    "bio": "too fast to handle"
+}
+5. Delete a user: http://localhost:3005/users/5
