@@ -55,7 +55,7 @@
 - installed cors (npm install cors)
 
 Put these into postman at aschool for testing purposes
-1. Create a fet request fro getting all the users: http://localhost:3005/home
+1. Create a get request to get all the users: http://localhost:3005/home
 2. Create a get request to get one user: http://localhost:3005/users/2
 3. Create a post request to create a user: http://localhost:3005/signup
 {
