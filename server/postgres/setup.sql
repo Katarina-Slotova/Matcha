@@ -68,14 +68,3 @@ CREATE TABLE IF NOT EXISTS reports (
 	reporter_id INT NOT NULL,
 	reported_id INT NOT NULL
 );
-
-
-
-/* For .env file:
-PORT=3005
-
-PGUSER=postgres 
-PGHOST=localhost
-PGPASSWORD=123456
-PGDATABASE=matchadb
-PGPORT=5432 */
