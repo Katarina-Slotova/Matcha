@@ -1,10 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 import Footer from "../components/Footer"
 import { useNavigate } from "react-router-dom"
-import { Form, FormControl, FormGroup, FormLabel } from "react-bootstrap"
+import { Form, FormControl, FormLabel } from "react-bootstrap"
 
-const Login = () => {
+const Login = ({ setToken }) => {
 	const navigate = useNavigate()
+	const [username, setUsername] = useState()
+	const [password, setPassword] = useState()
+
 
 	const onSubmit = (event) => {
 		event.preventDefault()
@@ -26,20 +29,20 @@ const Login = () => {
 									<Form onSubmit={onSubmit}>
 										<div class="row">
 											<div class="col-md-6 mb-4">
-												<FormControl type="text" id="firstName" class="form-control form-control-lg" required/>
-												<FormLabel class="form-label" for="firstName">Username</FormLabel>
+												<FormControl type="text" id="username" class="form-control form-control-lg" onChange={(e) => setUsername(e.target.value)} required/>
+												<FormLabel class="form-label" for="username">Username</FormLabel>
 											</div>
 
-											<div class="col-md-6 mb-4">
+{/* 											<div class="col-md-6 mb-4">
 												<FormControl type="email" id="lastName" class="form-control form-control-lg" required/>
 												<FormLabel class="form-label" for="lastName">Email</FormLabel>
-											</div>
+											</div> */}
 										</div>
 
 										<div class="row">
 											<div class="col-md-6 mb-4">
-												<FormControl type="password" id="firstName" class="form-control form-control-lg" required/>
-												<FormLabel class="form-label" for="firstName">Password</FormLabel>
+												<FormControl type="password" id="password" class="form-control form-control-lg" onChange={(e) => setPassword(e.target.value)} required/>
+												<FormLabel class="form-label" for="password">Password</FormLabel>
 											</div>
 										</div>
 
