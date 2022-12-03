@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS users (
 	image TEXT DEFAULT 'none',
 	age INT NOT NULL,
 	gender VARCHAR(1000) NOT NULL,
-	sexual_orient VARCHAR(1000) DEFAULT 'bisexual',
+	gender_interest VARCHAR(1000) DEFAULT 'Everyone',
 	bio VARCHAR(1000) DEFAULT 'none',
 	tags VARCHAR(1000),
 	city VARCHAR(1000),
