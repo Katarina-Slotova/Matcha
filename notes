@@ -93,3 +93,10 @@ Put these into postman at aschool for testing purposes
 - add button to profile page 
 - modify style.css (parts that relate to signup and settings pages)
 - change sexual orinatation to gender interest
+PORT=3005
+
+PGUSER=postgres 
+PGHOST=localhost
+PGPASSWORD=123456
+PGDATABASE=matchadb
+PGPORT=5432
