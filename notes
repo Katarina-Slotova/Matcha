@@ -87,3 +87,9 @@ Put these into postman at aschool for testing purposes
     "bio": "too fast to handle"
 }
 5. Delete a user: http://localhost:3005/users/5
+
+- create settings page
+- modify signup page
+- add button to profile page 
+- modify style.css (parts that relate to signup and settings pages)
+- change sexual orinatation to gender interest
