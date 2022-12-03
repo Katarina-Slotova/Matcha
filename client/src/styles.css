@@ -107,6 +107,50 @@ html {
 	color: purple;
 }
 
+/* --------------- User Settings & Signup Pages --------------------- */
+.settings form {
+	display: flex;
+	justify-content: center;
+}
+
+.settings form section {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	width: 50%;
+}
+
+.settings form input {
+	padding: 5px 20px;
+	margin-bottom: 15px;
+	font-size: 15px;
+	border-radius: 10px;
+}
+
+.settings form .multiple-input-container {
+	display: flex;
+	flex-direction: row;
+}
+
+.settings form .multiple-input-container input {
+	 margin-right: 10px;
+}
+
+.settings form input[type="radio"] {
+	display: none;
+}
+
+.settings form input[type="radio"]:checked + label {
+	border: solid 2px #fc6767;
+}
+
+.settings form .multiple-input-container label {
+	 padding: 10px;
+	 border: solid 1px rgb(204, 204, 204);
+	 border-radius: 10px;
+	 margin-right: 10px;
+}
+
 footer {
 	font-family: 'Lobster', cursive;
 	text-align: center;
