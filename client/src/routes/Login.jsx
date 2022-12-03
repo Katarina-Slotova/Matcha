@@ -56,6 +56,7 @@ const Login = ({ setToken }) => {
 					</div>
 				</div>
 			</section>
+			<hr />
 			<Footer />
 		</div>
 	)

@@ -31,6 +31,7 @@ const Landing = () => {
 					<div className="col-lg-6 col-xl-5 ms-xl-auto px-lg-4 text-center text-primary"><img className="img-landing img-fluid mb-4" width="350" height="350" src="matcha-logo-dark.png" alt="matcha-logo" style={{transform: "rotate(10deg)"}}></img></div>
  				</div>
 			</div>
+			<hr />
 			<Footer />
 		</div>
 	)

@@ -110,7 +110,8 @@ html {
 footer {
 	font-family: 'Lobster', cursive;
 	text-align: center;
-	margin-top: 50px;
+	padding-top: 5px;
+	padding-bottom: 10px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;

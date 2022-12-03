@@ -42,6 +42,7 @@ const Home = (props) => {
 			})}
 			<UserCard />
 			<UserCard />
+			<hr />
 			<Footer />
 		</div>
 	)
