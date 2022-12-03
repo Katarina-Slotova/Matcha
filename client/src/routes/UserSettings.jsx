@@ -1,12 +1,13 @@
 import React, { useState } from "react"
 import Footer from "../components/Footer"
 import NavigationBar from "../components/Navbar"
+import UploadImage from "../components/UploadImage"
 import { useNavigate } from "react-router-dom"
 import { Form, FormControl, FormLabel } from "react-bootstrap"
 
 const UserSettings = () => {
 	const navigate = useNavigate()
-	const [username, setUsername] = useState(null)
+/* 	const [username, setUsername] = useState(null)
 	const [email, setEmail] = useState(null)
 	const [password, setPassword] = useState(null)
 	const [confirmPassword, setConfirmPassword] = useState(null)
@@ -15,13 +16,34 @@ const UserSettings = () => {
 	const [age, setAge] = useState(null)
 	const [city, setCity] = useState(null)
 	const [country, setCountry] = useState(null)
-	const [bio, setBio] = useState(null)
+	const [bio, setBio] = useState(null) */
+	const [confirmPassword, setConfirmPassword] = useState(null)
+	const [formData, setFormData] = useState({
+		id: '',
+		first_name: '',
+		last_name: '',
+		user_name: '',
+		image: '',
+		age: '',
+		gender: '',
+		gender_interest: '',
+		bio: '',
+		city: '',
+		country: '',
+		password: '',
+		email: ''
+	})
 	const [error, setError] = useState(null)
+
+	const handleChange = () => {
+
+
+	}
 
 	const onSubmit = (event) => {
 		event.preventDefault()
 		try {
-			if (password !== confirmPassword) {
+			if (formData.password !== confirmPassword) {
 				setError('Passwords do not match!') 
 			}
 			console.log('make post req to db')
@@ -46,14 +68,14 @@ const UserSettings = () => {
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="user_name">Username</FormLabel>
-													<FormControl type="text" id="user-name" name="user_name" class="form-control form-control-lg" value="" onChange={(e) => setUsername(e.target.value)} required/>
+													<FormControl type="text" id="user-name" name="user_name" class="form-control form-control-lg" value="" onChange={handleChange} required/>
 												</div>
 											</div>
 
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="email">Email</FormLabel>
-													<FormControl type="email" id="email" name="email" class="form-control form-control-lg" value="" onChange={(e) => setEmail(e.target.value)} required/>
+													<FormControl type="email" id="email" name="email" class="form-control form-control-lg" value="" onChange={handleChange} required/>
 												</div>
 											</div>
 										</div>
@@ -63,7 +85,7 @@ const UserSettings = () => {
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="password">Password</FormLabel>
-													<FormControl type="password" id="passowrd" name="password" class="form-control form-control-lg" value="" onChange={(e) => setPassword(e.target.value)} required/>
+													<FormControl type="password" id="passowrd" name="password" class="form-control form-control-lg" value="" onChange={handleChange} required/>
 												</div>
 											</div>
 
@@ -79,14 +101,14 @@ const UserSettings = () => {
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="first_name">First Name</FormLabel>
-													<FormControl type="text" id="first-name" name="first_name" class="form-control form-control-lg" value="" onChange={(e) => setFirstName(e.target.value)} required/>
+													<FormControl type="text" id="first-name" name="first_name" class="form-control form-control-lg" value="" onChange={handleChange} required/>
 												</div>
 											</div>
 
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="last_name">Last Name</FormLabel>
-													<FormControl type="text" id="last-name" name="last_name" class="form-control form-control-lg" value="" onChange={(e) => setLastName(e.target.value)} required/>
+													<FormControl type="text" id="last-name" name="last_name" class="form-control form-control-lg" value="" onChange={handleChange} required/>
 												</div>
 											</div>
 										</div>
@@ -95,7 +117,7 @@ const UserSettings = () => {
 											<div>
 												<div class="form-outline datepicker w-100">
 													<FormLabel for="age" class="form-label">Age</FormLabel>
-													<FormControl type="text" id="age" name="age" class="form-control form-control-lg" value="" onChange={(e) => setAge(e.target.value)} required/>
+													<FormControl type="text" id="age" name="age" class="form-control form-control-lg" value="" onChange={handleChange} required/>
 												</div>
 											</div>
 											<div>
@@ -121,13 +143,13 @@ const UserSettings = () => {
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="city">City</FormLabel>
-													<FormControl type="text" name="city" class="form-control form-control-lg" value="" onChange={(e) => setCity(e.target.value)} required/>
+													<FormControl type="text" name="city" class="form-control form-control-lg" value="" onChange={handleChange} required/>
 												</div>
 											</div>
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="country">Country</FormLabel>
-													<FormControl type="text" name="country" class="form-control form-control-lg" value="" onChange={(e) => setCountry(e.target.value)} required/>
+													<FormControl type="text" name="country" class="form-control form-control-lg" value="" onChange={handleChange} required/>
 												</div>
 											</div>
 										</div>
@@ -144,11 +166,11 @@ const UserSettings = () => {
 											*/}
 											<FormLabel for="gender-interest" class="form-label">Show Me</FormLabel>
 												<div className="multiple-input-container">
-													<input type="radio" id="man-gender-interest" name="gender_interest" value="man" onChange={'#'} checked={false} required />
+													<input type="radio" id="man-gender-interest" name="gender_interest" value="man" onChange={handleChange} checked={false} required />
 													<FormLabel for="man-gender-interest" class="form-label">Men</FormLabel>
-													<input type="radio" id="woman-gender-interest" name="gender_interest" value="woman" onChange={'#'} checked={false} required />
+													<input type="radio" id="woman-gender-interest" name="gender_interest" value="woman" onChange={handleChange} checked={false} required />
 													<FormLabel for="man-gender-interest" class="form-label">Women</FormLabel>
-													<input type="radio" id="everyone-gender-interest" name="gender_interest" value="everyone" onChange={'#'} checked={false} required /> 
+													<input type="radio" id="everyone-gender-interest" name="gender_interest" value="everyone" onChange={handleChange} checked={false} required /> 
 													<FormLabel for="more-gender-interest" class="form-label">Everyone</FormLabel>
 												</div>
 										</div>
@@ -156,7 +178,7 @@ const UserSettings = () => {
 										<div class="row">
 												<div class="form-outline">
 													<FormLabel class="form-label" for="about">About me</FormLabel>
-													<FormControl type="text" id="about" name="about" class="form-control form-control-lg" placeholder="I like long walks..." value="" onChange={(e) => setBio(e.target.value)} required/>
+													<FormControl type="text" id="about" name="about" class="form-control form-control-lg" placeholder="I like long walks..." value="" onChange={handleChange} required/>
 												</div>
 										</div>
 
@@ -168,7 +190,11 @@ const UserSettings = () => {
 									<section>
 										<div>
 											<FormLabel class="form-label" for="image">Profile photo</FormLabel>
-											<input type="url" id="image" name="image" value="" onChange={'#'} required/>
+											{/* <input type="url" id="image" name="image" onChange={handleChange} required/> */}
+											<UploadImage />
+										</div>
+										<div className="photo-container">
+											<img src={formData.image} alt="profile-img" />
 										</div>
 									</section>
 								</Form>

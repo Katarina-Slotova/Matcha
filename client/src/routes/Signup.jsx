@@ -6,7 +6,7 @@ import { Form, FormControl, FormLabel } from "react-bootstrap"
 
 const Signup = () => {
 	const navigate = useNavigate()
-	const [username, setUsername] = useState(null)
+/* 	const [username, setUsername] = useState(null)
 	const [email, setEmail] = useState(null)
 	const [password, setPassword] = useState(null)
 	const [confirmPassword, setConfirmPassword] = useState(null)
@@ -14,13 +14,41 @@ const Signup = () => {
 	const [lastName, setLastName] = useState(null)
 	const [age, setAge] = useState(null)
 	const [city, setCity] = useState(null)
-	const [country, setCountry] = useState(null)
+	const [country, setCountry] = useState(null) */
+	const [confirmPassword, setConfirmPassword] = useState()
+	const [formData, setFormData] = useState({
+		first_name: '',
+		last_name: '',
+		user_name: '',
+		age: '',
+		gender_identity: 'man',
+		gender_interest: 'woman',
+		city: '',
+		country: '',
+		password: '',
+		email: ''
+	})
 	const [error, setError] = useState(null)
+
+	const handleChange = (e) => {
+		// get the value and name from the inputs
+		const value = e.target.value
+		const name = e.target.name
+		
+		setFormData((prevState) => ({
+			// get the whole previous State
+			...prevState,
+			// update the values by searching for the names
+			[name]: value
+		}))
+	}
+
+	console.log(formData)
 
 	const onSubmit = (event) => {
 		event.preventDefault()
 		try {
-			if (password !== confirmPassword) {
+			if (formData.password !== confirmPassword) {
 				setError('Passwords do not match!') 
 			}
 			console.log('make post req to db')
@@ -31,129 +59,114 @@ const Signup = () => {
 	}
 
 	return (
-		<div class="gradient-custom">
-			<h1 class="text-light landing-heading">Create an account</h1>
-			<section class="vh-100">
-				<div class="container py-6 h-50">
-					<div class="row justify-content-center align-items-center h-100">
-						<div class="col-12 col-lg-9 col-xl-7">
-							<div class="card shadow-2-strong card-registration">
-								<div class="card-body p-4 p-md-5 settings">
-									<h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+		<div className="gradient-custom">
+			<h1 className="text-light landing-heading">Create an account</h1>
+			<section className="vh-100">
+				<div className="container py-6 h-50">
+					<div className="row justify-content-center align-items-center h-100">
+						<div className="col-12 col-lg-9 col-xl-7">
+							<div className="card shadow-2-strong card-registration">
+								<div className="card-body p-4 p-md-5 settings">
+									<h3 className="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
 									<Form onSubmit={onSubmit}>
 									<section style={{width: "100%"}}>
-										<div class="row">
+										<div className="row">
 											<div>
-												<div class="form-outline">
-													<FormLabel class="form-label" for="user_name">Username</FormLabel>
-													<FormControl type="text" id="user-name" name="user_name" class="form-control form-control-lg" value="" onChange={(e) => setUsername(e.target.value)} required/>
+												<div className="form-outline">
+													<FormLabel className="form-label" htmlFor="user_name">Username</FormLabel>
+													<FormControl type="text" id="user-name" name="user_name" className="form-control form-control-lg" value={formData.user_name} onChange={handleChange} required/>
 												</div>
 											</div>
 
 											<div>
-												<div class="form-outline">
-													<FormLabel class="form-label" for="email">Email</FormLabel>
-													<FormControl type="email" id="email" name="email" class="form-control form-control-lg" value="" onChange={(e) => setEmail(e.target.value)} required/>
-												</div>
-											</div>
-										</div>
-
-
-										<div class="row">
-											<div>
-												<div class="form-outline">
-													<FormLabel class="form-label" for="password">Password</FormLabel>
-													<FormControl type="password" id="passowrd" name="password" class="form-control form-control-lg" value="" onChange={(e) => setPassword(e.target.value)} required/>
-												</div>
-											</div>
-
-											<div>
-												<div class="form-outline">
-													<FormLabel class="form-label" for="password">Repeat Password</FormLabel>
-													<FormControl type="password" id="password-check" name="password-check" class="form-control form-control-lg" value="" onChange={(e) => setConfirmPassword(e.target.value)} required/>
+												<div className="form-outline">
+													<FormLabel className="form-label" htmlFor="email">Email</FormLabel>
+													<FormControl type="email" id="email" name="email" className="form-control form-control-lg" value={formData.email} onChange={handleChange} required/>
 												</div>
 											</div>
 										</div>
 
-										<div class="row">
+
+										<div className="row">
 											<div>
-												<div class="form-outline">
-													<FormLabel class="form-label" for="first_name">First Name</FormLabel>
-													<FormControl type="text" id="first-name" name="first_name" class="form-control form-control-lg" value="" onChange={(e) => setFirstName(e.target.value)} required/>
+												<div className="form-outline">
+													<FormLabel className="form-label" htmlFor="password">Password</FormLabel>
+													<FormControl type="password" id="passowrd" name="password" className="form-control form-control-lg" value={formData.password} onChange={handleChange} required/>
 												</div>
 											</div>
 
 											<div>
-												<div class="form-outline">
-													<FormLabel class="form-label" for="last_name">Last Name</FormLabel>
-													<FormControl type="text" id="last-name" name="last_name" class="form-control form-control-lg" value="" onChange={(e) => setLastName(e.target.value)} required/>
+												<div className="form-outline">
+													<FormLabel className="form-label" htmlFor="password">Repeat Password</FormLabel>
+													<FormControl type="password" id="password-check" name="password-check" className="form-control form-control-lg" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required/>
 												</div>
 											</div>
 										</div>
 
-										<div class="row">
+										<div className="row">
 											<div>
-												<div class="form-outline datepicker w-100">
-													<FormLabel for="age" class="form-label">Age</FormLabel>
-													<FormControl type="text" id="age" name="age" class="form-control form-control-lg" value="" onChange={(e) => setAge(e.target.value)} required/>
+												<div className="form-outline">
+													<FormLabel className="form-label" htmlFor="first_name">First Name</FormLabel>
+													<FormControl type="text" id="first-name" name="first_name" className="form-control form-control-lg" value={formData.first_name} onChange={handleChange} required/>
+												</div>
+											</div>
+
+											<div>
+												<div className="form-outline">
+													<FormLabel className="form-label" htmlFor="last_name">Last Name</FormLabel>
+													<FormControl type="text" id="last-name" name="last_name" className="form-control form-control-lg" value={formData.last_name} onChange={handleChange} required/>
+												</div>
+											</div>
+										</div>
+
+										<div className="row">
+											<div>
+												<div className="form-outline datepicker w-100">
+													<FormLabel htmlFor="age" className="form-label">Age</FormLabel>
+													<FormControl type="text" id="age" name="age" className="form-control form-control-lg" value={formData.age} onChange={handleChange} required/>
 												</div>
 											</div>
 											<div>
-												<FormLabel for="gender" class="form-label">Gender</FormLabel>
+												<FormLabel htmlFor="gender-identity" className="form-label">Gender</FormLabel>
 												<div className="multiple-input-container">
-													<input type="radio" id="man-gender-identity" name="gender_identity" value="man" onChange={'#'} checked={false} required />
-													<FormLabel for="gender" class="form-label">Man</FormLabel>
-													<input type="radio" id="woman-gender-identity" name="gender_identity" value="woman" onChange={'#'} checked={false} required />
-													<FormLabel for="gender" class="form-label">Woman</FormLabel>
-													<input type="radio" id="other-gender-identity" name="gender_identity" value="other" onChange={'#'} checked={false} required />
-													<FormLabel for="gender" class="form-label">Other</FormLabel>
-												</div>
-												{/* <select class="form-select" style={{height: "48px"}}>
-													<option value="1" disabled>Choose gender</option>
-													<option value="2">Female</option>
-													<option value="3">Male</option>
-													<option value="4">Other</option>
-												</select>	 */}
-											</div>
-										</div>
-
-										<div class="row">
-											<div>
-												<div class="form-outline">
-													<FormLabel class="form-label" for="city">City</FormLabel>
-													<FormControl type="text" name="city" class="form-control form-control-lg" value="" onChange={(e) => setCity(e.target.value)} required/>
-												</div>
-											</div>
-											<div>
-												<div class="form-outline">
-													<FormLabel class="form-label" for="country">Country</FormLabel>
-													<FormControl type="text" name="country" class="form-control form-control-lg" value="" onChange={(e) => setCountry(e.target.value)} required/>
+													<input type="radio" id="man-gender-identity" name="gender_identity" value="man" onChange={handleChange} checked={formData.gender_identity === 'man'}  />
+													<FormLabel htmlFor="gender-identity" className="form-label">Man</FormLabel>
+													<input type="radio" id="woman-gender-identity" name="gender_identity" value="woman" onChange={handleChange} checked={formData.gender_identity === 'woman'}  />
+													<FormLabel htmlFor="gender-identity" className="form-label">Woman</FormLabel>
+													<input type="radio" id="other-gender-identity" name="gender_identity" value="other" onChange={handleChange} checked={formData.gender_identity === 'other'}  />
+													<FormLabel htmlFor="gender-identity" className="form-label">Other</FormLabel>
 												</div>
 											</div>
 										</div>
 
-										<div class="row">
-											{/* <FormLabel for="interest" class="form-label select-label">I am interested in</FormLabel>
-												<div class="col-12">
-													<select class="form-select">
-														<option value="1" disabled>Choose option</option>
-														<option value="2">Men</option>
-														<option value="3">Women</option>
-														<option value="4">Both</option>
-													</select> 
-											*/}
-											<FormLabel for="gender-interest" class="form-label">Show Me</FormLabel>
+										<div className="row">
+											<div>
+												<div className="form-outline">
+													<FormLabel className="form-label" htmlFor="city">City</FormLabel>
+													<FormControl type="text" name="city" className="form-control form-control-lg" value={formData.city} onChange={handleChange} required/>
+												</div>
+											</div>
+											<div>
+												<div className="form-outline">
+													<FormLabel className="form-label" htmlFor="country">Country</FormLabel>
+													<FormControl type="text" name="country" className="form-control form-control-lg" value={formData.country} onChange={handleChange} required/>
+												</div>
+											</div>
+										</div>
+
+										<div className="row">
+											<FormLabel htmlFor="gender-interest" className="form-label">Show Me</FormLabel>
 												<div className="multiple-input-container">
-													<input type="radio" id="man-gender-interest" name="gender_interest" value="man" onChange={'#'} checked={false} required />
-													<FormLabel for="man-gender-interest" class="form-label">Men</FormLabel>
-													<input type="radio" id="woman-gender-interest" name="gender_interest" value="woman" onChange={'#'} checked={false} required />
-													<FormLabel for="man-gender-interest" class="form-label">Women</FormLabel>
-													<input type="radio" id="everyone-gender-interest" name="gender_interest" value="everyone" onChange={'#'} checked={false} required /> 
-													<FormLabel for="more-gender-interest" class="form-label">Everyone</FormLabel>
+													<input type="radio" id="man-gender-interest" name="gender_interest" value="man" onChange={handleChange} checked={formData.gender_interest === 'man'}  />
+													<FormLabel htmlFor="man-gender-interest" className="form-label">Men</FormLabel>
+													<input type="radio" id="woman-gender-interest" name="gender_interest" value="woman" onChange={handleChange} checked={formData.gender_interest === 'woman'}  />
+													<FormLabel htmlFor="man-gender-interest" className="form-label">Women</FormLabel>
+													<input type="radio" id="everyone-gender-interest" name="gender_interest" value="everyone" onChange={handleChange} checked={formData.gender_interest === 'everyone'}  /> 
+													<FormLabel htmlFor="more-gender-interest" className="form-label">Everyone</FormLabel>
 												</div>
 										</div>
 
-										<div class="mt-4 pt-2">
+										<div className="mt-4 pt-2">
 											<input className="col btn btn-purple-moon btn-lg" type="submit" value="Submit" />
 										</div>
 									</section>
