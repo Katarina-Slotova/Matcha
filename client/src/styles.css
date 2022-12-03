@@ -1,6 +1,12 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap');
+
+html {
 	margin: 0;
 	padding: 0;
+}
+
+* {
+	font-family: 'Readex Pro', sans-serif;
 }
 
 .App {
@@ -57,7 +63,17 @@ body {
 	background: -webkit-linear-gradient(to right, #fc6767, #ec008c);  /* Chrome 10-25, Safari 5.1-6 */
 	background: linear-gradient(to right, #fc6767, #ec008c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	color: #fff;
-	border: 3px solid #eee;
+	text-transform: uppercase;
+	font-size: 20px;
+	padding: 12px 30px;
+	border: none;
+	border-radius: 30px;
+}
+
+.btn-pink-moon:hover {
+	background: #ec008c;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #fc6767, #ec008c);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #fc6767, #ec008c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .btn-purple-moon {
@@ -65,7 +81,17 @@ body {
 	background: -webkit-linear-gradient(to right, #8f94fb, #4e54c8);  /* Chrome 10-25, Safari 5.1-6 */
 	background: linear-gradient(to right, #8f94fb, #4e54c8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	color: #fff;
-	border: 3px solid #eee;
+	text-transform: uppercase;
+	font-size: 20px;
+	padding: 12px 30px;
+	border: none;
+	border-radius: 30px;
+}
+
+.btn-purple-moon:hover {
+	background: #4e54c8;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #8f94fb, #4e54c8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .badge {
@@ -89,4 +115,5 @@ footer {
 	flex-direction: row;
 	justify-content: center;
 	font-size: 15px;
+	color: grey;
 }
