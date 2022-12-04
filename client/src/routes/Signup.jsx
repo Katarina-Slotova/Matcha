@@ -22,7 +22,7 @@ const Signup = () => {
 		user_name: '',
 		age: '',
 		gender_identity: 'man',
-		gender_interest: 'woman',
+		gender_interest: 'everyone',
 		city: '',
 		country: '',
 		password: '',
@@ -129,12 +129,12 @@ const Signup = () => {
 											<div>
 												<FormLabel htmlFor="gender-identity" className="form-label">Gender</FormLabel>
 												<div className="multiple-input-container">
-													<input type="radio" id="man-gender-identity" name="gender_identity" value="man" onChange={handleChange} checked={formData.gender_identity === 'man'}  />
-													<FormLabel htmlFor="gender-identity" className="form-label">Man</FormLabel>
-													<input type="radio" id="woman-gender-identity" name="gender_identity" value="woman" onChange={handleChange} checked={formData.gender_identity === 'woman'}  />
-													<FormLabel htmlFor="gender-identity" className="form-label">Woman</FormLabel>
-													<input type="radio" id="other-gender-identity" name="gender_identity" value="other" onChange={handleChange} checked={formData.gender_identity === 'other'}  />
-													<FormLabel htmlFor="gender-identity" className="form-label">Other</FormLabel>
+													<FormControl type="radio" id="man-gender-identity" name="gender_identity" value="man" checked={formData.gender_identity === 'man'} onChange={handleChange} />
+													<FormLabel htmlFor="man-gender-identity" className="form-label">Man</FormLabel>
+													<FormControl type="radio" id="woman-gender-identity" name="gender_identity" value="woman" checked={formData.gender_identity === 'woman'} onChange={handleChange} />
+													<FormLabel htmlFor="woman-gender-identity" className="form-label">Woman</FormLabel>
+													<FormControl type="radio" id="other-gender-identity" name="gender_identity" value="other" checked={formData.gender_identity === 'other'} onChange={handleChange} />
+													<FormLabel htmlFor="other-gender-identity" className="form-label">Other</FormLabel>
 												</div>
 											</div>
 										</div>
@@ -157,12 +157,12 @@ const Signup = () => {
 										<div className="row">
 											<FormLabel htmlFor="gender-interest" className="form-label">Show Me</FormLabel>
 												<div className="multiple-input-container">
-													<input type="radio" id="man-gender-interest" name="gender_interest" value="man" onChange={handleChange} checked={formData.gender_interest === 'man'}  />
+													<FormControl type="radio" id="man-gender-interest" name="gender_interest" value="man" checked={formData.gender_interest === 'man'} onChange={handleChange} />
 													<FormLabel htmlFor="man-gender-interest" className="form-label">Men</FormLabel>
-													<input type="radio" id="woman-gender-interest" name="gender_interest" value="woman" onChange={handleChange} checked={formData.gender_interest === 'woman'}  />
-													<FormLabel htmlFor="man-gender-interest" className="form-label">Women</FormLabel>
-													<input type="radio" id="everyone-gender-interest" name="gender_interest" value="everyone" onChange={handleChange} checked={formData.gender_interest === 'everyone'}  /> 
-													<FormLabel htmlFor="more-gender-interest" className="form-label">Everyone</FormLabel>
+													<FormControl type="radio" id="woman-gender-interest" name="gender_interest" value="woman" checked={formData.gender_interest === 'woman'} onChange={handleChange} />
+													<FormLabel htmlFor="woman-gender-interest" className="form-label">Women</FormLabel>
+													<FormControl type="radio" id="everyone-gender-interest" name="gender_interest" value="everyone" checked={formData.gender_interest === 'everyone'} onChange={handleChange} /> 
+													<FormLabel htmlFor="everyone-gender-interest" className="form-label">Everyone</FormLabel>
 												</div>
 										</div>
 
