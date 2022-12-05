@@ -203,6 +203,42 @@ html {
 	margin-top: 40px;
 }
 
+/* --------------- Chat --------------------- */
+.chat-container {
+	background-color: white;
+	box-shadow: rgba(0, 0, 0, 0.05) 0 6px 24px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px;
+	width: 30%;
+	/* make sure that chat container is always in front of dashboard */
+	z-index: 1;
+	padding: 0 10px;
+}
+
+.option {
+	font-size: 15px;
+	padding: 10px;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+.option:disabled {
+	background: gray;  /* fallback for old browsers */
+	background: gray;  /* Chrome 10-25, Safari 5.1-6 */
+	background: gray; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.chat-display {
+	padding: 20px;
+	height: 60vh;
+	/* overflow y is for scrolling through messages when there are many of them */
+	overflow-y: auto;
+}
+
+.chat-input {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
 /* --------------- Footer --------------------- */
 footer {
 	font-family: 'Lobster', cursive;
