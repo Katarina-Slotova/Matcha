@@ -5,7 +5,7 @@ function UploadFile() {
   
   return (
     <div>
-		<Button className="col btn btn-purple-moon btn-lg">Upload file</Button>
+		<Button className="col btn btn-purple-moon smaller">Upload file</Button>
     </div>
   )
 }

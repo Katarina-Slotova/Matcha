@@ -9,6 +9,7 @@ import Login from "./routes/Login"
 import Signup from "./routes/Signup"
 import { UsersContextProvider } from './context/UsersContext'
 import './styles.css'
+import Dashboard from "./routes/Dashboard"
 
 const App = () => {
 	const [user, setUser] = useState(null)
@@ -34,6 +35,7 @@ const App = () => {
 						<Route path="/settings" element={<UserSettings />}></Route>
 						<Route path="/login" element={<Login onLogin={login}/>}></Route>
 						<Route path="/signup" element={<Signup />}></Route>
+						<Route path="/dashboard" element={<Dashboard />}></Route>
 					</Routes>
 				</Router>
 			</div>

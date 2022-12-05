@@ -183,7 +183,7 @@ const UserSettings = () => {
 									<section>
 										<div>
 											<FormLabel class="form-label" for="image">Profile photo</FormLabel>
-											{/* <input type="url" id="image" name="image" onChange={handleChange} required/> */}
+											{/* <input type="image" id="image" name="image" onChange={handleChange} required/> */}
 											<UploadImage />
 										</div>
 										<div className="photo-container">
