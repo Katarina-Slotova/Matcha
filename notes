@@ -102,3 +102,6 @@ PGDATABASE=matchadb
 PGPORT=5432
 
 - install react tinder card: npm i react-tinder-card; for proper function it is necessary to install also spring-react: npm i @react-spring/web
+- create user cards with photos and user info
+
+- create and style chat area
