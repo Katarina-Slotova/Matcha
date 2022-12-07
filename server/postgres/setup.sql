@@ -6,10 +6,9 @@ CREATE TABLE IF NOT EXISTS users (
 	username VARCHAR(1000) NOT NULL,
 	image TEXT DEFAULT 'none',
 	age INT NOT NULL,
-	gender VARCHAR(1000) NOT NULL,
+	gender_identity VARCHAR(1000) NOT NULL,
 	gender_interest VARCHAR(1000) DEFAULT 'Everyone',
 	bio VARCHAR(1000) DEFAULT 'none',
-	tags VARCHAR(1000),
 	city VARCHAR(1000),
 	country VARCHAR(1000),
 	actual_location VARCHAR(1000), /* complete this */
@@ -21,6 +20,7 @@ CREATE TABLE IF NOT EXISTS users (
 	online SMALLINT DEFAULT 0,
 	last_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+/* tags VARCHAR(1000), */
 
 CREATE TABLE IF NOT EXISTS user_images (
 	id BIGSERIAL NOT NULL PRIMARY KEY,

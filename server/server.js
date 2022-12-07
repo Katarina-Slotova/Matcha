@@ -3,6 +3,8 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 const db = require('./db')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 // we need to use cors middleware in order for our server and client side to be able to communicate properly
 // client and server is each running on its own domain 
@@ -15,7 +17,7 @@ app.use(cors())
 app.use(express.json())
 
 // Access home page with route handler
-app.get("/home", async (req, res) => {
+app.get("/dashboard", async (req, res) => {
 	try {
 		const results = await db.query("SELECT * FROM users") // returns a promise
 		console.log(results)
@@ -92,38 +94,56 @@ app.get("/users/:id", async (req, res) => {
 // create user with route handler
 // the info sent in the requst will be saved in "body" & converted to JS object -- for that, we need to use middleware express.json() => see the top of the file; without this middleware, the body would be undefined
 app.post("/signup", async (req, res) => {
+	const hashedPassword = await bcrypt.hash(req.body.password, 10)
+	const sanitizedEmail = req.body.email.toLowerCase()
+
 	console.log(req.body)
-	try {
-		const results = await db.query("INSERT INTO users (firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) returning *", // changed the token in the Table to null for now, before we assign an actual automatically generated token
-		[ 
-			req.body.firstname, req.body.lastname, req.body.username, req.body.email, req.body.city, req.body.country, req.body.password, req.body.image, req.body.age, req.body.gender, req.body.bio, req.body.token,
-		])
-		console.log(results)
-		res.status(201).json({
-			status: "success",
-			data: {
-				user: results.rows[0]
-/* 				firstname: "Ferocious",
-				lastname: "Cupcake", 
-				username: "SweetNSour",
-				email: "wishfor@cupcake.io", 
-				password: "eat_your_veggies_I_mean_cupcakes",
-				image: 'cupcake.jpg',
-				age: "18",
-				gender: "cupcake",
-				location: "your local bakery" */
-/* 				actual_location: "your wildest dreams",
-				token: "sdjfvvfhsjlslslslsdls", 
-				INSERT INTO users (id, firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES (1, 'Ferocious', 'Cupcake', 'SweetNSour', 'wishfor@cupcake.io', 'Bakeria', 'Wonderland', 'eat_your_veggies_I_mean_cupcakes', 'cupcake.jpg', 18, 'cupcake', 'too sweet to handle', 'kzsgdfksvzvbd');
-				INSERT INTO users (id, firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES (2, 'Kata', 'Mata', 'UltimateHedgehog', 'hedge@hog.io', 'Local Forest', 'Wonderland', 'do_not_piss_hedges_off', 'hedgehog.jpg', 12, 'hedgehog', 'best hedgehog ever', 'kzsgdfksvzvbd');
-				INSERT INTO users (id, firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES (3, 'Bobo', 'Robo', 'RattleSnake', 'rattle@snake.io', 'extinct, slaughtered by badass hedgehog', 'Wonderland', 'ban_all_hedgehogs', 'snake.jpg', 12, 'snake', 'super scared of badass killer hedgehog', 'kzsgdfksvzvbd');
-				*/
+
+	// !!!!!!!!!!! CHECKING IF EMAIL/USERNAME ALREADY EXISTS DOES NOT WORK !!!!!!!!!!
+	//try {
+/* 		const check = await db.query("SELECT id FROM users WHERE email = $1", [req.body.email])
+		console.log('This is the checked info: ', check) */
+/* 		if (check) {
+			return res.status(409)
+						.send('This username or email already exists.')
+		}
+		else { */
+			try {
+				const results = await db.query("INSERT INTO users (firstname, lastname, username, age, gender_identity, gender_interest, bio, city, country, password, email) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning *", // changed the token in the Table to null for now, before we assign an actual automatically generated token
+				[ 
+					req.body.firstname, req.body.lastname, req.body.username, req.body.age, req.body.gender_identity, req.body.gender_interest, req.body.bio, req.body.city, req.body.country, hashedPassword, sanitizedEmail
+				])
+				console.log(results)
+				res.status(201)
+					.json({
+					status: "success",
+					data: {
+						user: results.rows[0]
+		/* 				firstname: "Ferocious",
+						lastname: "Cupcake", 
+						username: "SweetNSour",
+						email: "wishfor@cupcake.io", 
+						password: "eat_your_veggies_I_mean_cupcakes",
+						image: 'cupcake.jpg',
+						age: "18",
+						gender: "cupcake",
+						location: "your local bakery" */
+		/* 				actual_location: "your wildest dreams",
+						token: "sdjfvvfhsjlslslslsdls", 
+						INSERT INTO users (id, firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES (1, 'Ferocious', 'Cupcake', 'SweetNSour', 'wishfor@cupcake.io', 'Bakeria', 'Wonderland', 'eat_your_veggies_I_mean_cupcakes', 'cupcake.jpg', 18, 'cupcake', 'too sweet to handle', 'kzsgdfksvzvbd');
+						INSERT INTO users (id, firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES (2, 'Kata', 'Mata', 'UltimateHedgehog', 'hedge@hog.io', 'Local Forest', 'Wonderland', 'do_not_piss_hedges_off', 'hedgehog.jpg', 12, 'hedgehog', 'best hedgehog ever', 'kzsgdfksvzvbd');
+						INSERT INTO users (id, firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES (3, 'Bobo', 'Robo', 'RattleSnake', 'rattle@snake.io', 'extinct, slaughtered by badass hedgehog', 'Wonderland', 'ban_all_hedgehogs', 'snake.jpg', 12, 'snake', 'super scared of badass killer hedgehog', 'kzsgdfksvzvbd');
+						*/
+					}
+				})
+			} catch (err) {
+				console.log(err)
 			}
-		})
-	} catch (err) {
+		}
+/* 	} catch (err) {
 		console.log(err)
-	}
-})
+	} */
+)
 
 app.put("/users/:id", async (req, res) => {
 	console.log(req.params.id)
