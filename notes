@@ -105,3 +105,9 @@ PGPORT=5432
 - create user cards with photos and user info
 
 - create and style chat area
+
+- install bcrypt for hashing passwords: npm install bcrypt
+- connect frontend to backend
+- user account creation working
+- checking whether email or username alrteady exists does not work yet
+- slightly modified users tabel in db
