@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Footer from "../components/Footer"
 import { useNavigate } from "react-router-dom"
 import { Form, FormControl, FormLabel } from "react-bootstrap"
+import axios from 'axios' 
 
 
 const Signup = () => {
@@ -45,17 +46,34 @@ const Signup = () => {
 
 	console.log(formData)
 
-	const onSubmit = (event) => {
-		event.preventDefault()
+	const onSubmit = async (e) => {
+		e.preventDefault()
 		try {
 			if (formData.password !== confirmPassword) {
 				setError('Passwords do not match!') 
+				return
 			}
-			console.log('make post req to db')
+
+			const response = await axios.post('http://localhost:3005/signup', {
+				firstname: formData.first_name,
+				lastname: formData.last_name, 
+				username: formData.user_name, 
+				age: formData.age, 
+				gender_identity: formData.gender_identity, 
+				gender_interest: formData.gender_interest,
+				city: formData.city, 
+				country: formData.country, 
+				password: formData.password, 
+				email: formData.email
+			})
+			console.log(response)
+			if (response.status ===  201) {
+				navigate('/dashboard') 
+			}
+
 		} catch (error) {
 			console.log(error) 
 		}
-		navigate('/home')
 	}
 
 	return (

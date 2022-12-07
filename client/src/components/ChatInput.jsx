@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 
 const ChatInput = () => {
-	const [textArea, setTextArea] = useState(null)
+	const [textArea, setTextArea] = useState('')
 
 	const handleChange = (e) => {
 		const value = e.target.value

@@ -56,7 +56,7 @@ const Dashboard = () => {
 							<TinderCard key={character.name} onSwipe={(dir) => swiped(dir, character.name)} onCardLeftScreen={() => outOfFrame(character.name)}>
 								<div>
 									<ListGroup className="list-group-flush user-info">
-								<div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
+								<div style={{ backgroundImage: 'url(' + character.url + ')' }} className='user-card'>
 									<h3>{character.name}</h3>
 								</div>
 										{/* <ListGroup.Item><Card.Link className='link' href="/profile">User's Name</Card.Link></ListGroup.Item> */}
