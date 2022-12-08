@@ -83,6 +83,7 @@ app.post("/signup", async (req, res) => {
 				.json({
 				token,
 				status: "success",
+				id: results.rows[0].id,
 				data: {
 					user: results.rows[0]
 				}
@@ -105,9 +106,9 @@ app.post("/login", async (req, res) => {
 			})
 			res.status(201)
 				.json({
-				token
-/* 				status: "success",
-				sanitizedEmail */
+				token,
+				status: "success",
+				id: results.rows[0].id
 			})
 		}
 		res.status(400).send('Invalid login credentials.') // !!!!!!!!!! this is not working, not being displayed !!!!!!!!!!!!!
@@ -117,29 +118,21 @@ app.post("/login", async (req, res) => {
 	}
 })
 
-app.put("/users/:id", async (req, res) => {
-	console.log(req.params.id)
+app.put("/settings", async (req, res) => {
 	console.log(req.body)
+	const formData = req.body.formData
+	const hashedPassword = await bcrypt.hash(formData.password, 10)
+	const sanitizedEmail = formData.email.toLowerCase()
+ 
 	try {
-		const results = await db.query("UPDATE users SET firstname = $1, lastname = $2, username = $3, email = $4, city = $5, country = $6, password = $7, image = $8, age = $9, gender = $10, bio = $11 WHERE id = $12 returning *", [
-			req.body.firstname, req.body.lastname, req.body.username, req.body.email, req.body.city, req.body.country, req.body.password, req.body.image, req.body.age, req.body.gender, req.body.bio, req.params.id
+		const results = await db.query("UPDATE users SET firstname = $1, lastname = $2, username = $3, age = $4, gender_identity = $5, gender_interest = $6, bio = $7, city = $8, country = $9, password = $10, email = $11 WHERE id = $12 returning *", [
+			formData.first_name, formData.last_name, formData.user_name, formData.age, formData.gender_identity, formData.gender_interest, formData.bio, formData.city, formData.country, hashedPassword, sanitizedEmail, formData.id
 		])
 		console.log(results)
 		res.status(200).json({
 			status: "success",
 			data: {
 				user: results.rows[0]
-/* 				firstname: "Bobo",
-				lastname: "Robo", 
-				username: "LesserUser",
-				email: "scaredof@cupcake.io", 
-				password: "ban_all_cupcakes",
-				image: 'snake.jpg',
-				age: "12",
-				gender: "snake",
-				sexual_orient: 'bisexual',
-				bio: "super scared of badass killer hedgehog",
-				location: "extinct, slaughtered by badass hedgehog", */
 			}
 		})
 	} catch (err) {
