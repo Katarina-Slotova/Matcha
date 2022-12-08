@@ -1,10 +1,12 @@
 import TinderCard from 'react-tinder-card'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ChatContainer from '../components/ChatContainer'
 import NavigationBar from '../components/Navbar';
 import Footer from '../components/Footer';
+import axios from 'axios'
+import { useCookies } from 'react-cookie'
 
 const db = [
 	{
@@ -30,8 +32,32 @@ const db = [
 ]
 
 const Dashboard = () => {
-	const characters = db
+	const [user, setUser] = useState()
 	const [lastDirection, setLastDirection] = useState()
+	const [cookies, setCookie, removeCookie] = useCookies(['user'])
+	
+	const userId = cookies.UserId
+	const getUser = async () => {
+		try {
+			const results = await axios.get('http://localhost:3005/user', {
+				params: {userId}
+			})
+			setUser(results.data)
+		}
+		catch (err) {
+			console.log(err)
+		}
+	}
+
+	// every time user changes, this function will be called
+	useEffect(() => {
+		getUser()
+	}, [])
+
+	console.log('id', userId)
+	console.log('user', user)
+
+	const characters = db
   
 	const swiped = (direction, nameToDelete) => {
 	  console.log('removing: ' + nameToDelete)
