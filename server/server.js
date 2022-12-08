@@ -27,32 +27,6 @@ app.get("/dashboard", async (req, res) => {
 			// structure response to the frontend using "data" -- frontend knows to look for "data" field in the payload, where all the data is stored 
 			data: {
 				results: results.rows,
-				/* users: [
-					{
-						id: 1,
-						firstname: "Kata",
-						lastname: "Mata", 
-						username: "SuperUser",
-						image: 'hedgehog.jpg',
-						age: "2236",
-						gender: "hedgehog",
-						sexual_orient: 'bisexual',
-						bio: "best hedgehog ever",
-						location: "your local forest",
-					},
-					{
-						id: 2,
-						firstname: "Bobo",
-						lastname: "Robo", 
-						username: "LesserUser",
-						image: 'snake.jpg',
-						age: "12",
-						gender: "snake",
-						sexual_orient: 'bisexual',
-						bio: "super scared of badass killer hedgehog",
-						location: "your local forest",
-					}
-				] */
 			},
 		})
 	} catch (err) {
@@ -72,18 +46,6 @@ app.get("/users/:id", async (req, res) => {
 			data: {
 				user: results.rows[0]
 			}
-				/* {
-					id: 2,
-					firstname: "Bobo",
-					lastname: "Robo", 
-					username: "LesserUser",
-					image: 'snake.jpg',
-					age: "12",
-					gender: "snake",
-					sexual_orient: 'bisexual',
-					bio: "super scared of badass killer hedgehog",
-					location: "your local forest",
-				} */
 		})
 	} catch (err) {
 		console.log(err)
@@ -99,51 +61,61 @@ app.post("/signup", async (req, res) => {
 
 	console.log(req.body)
 
-	// !!!!!!!!!!! CHECKING IF EMAIL/USERNAME ALREADY EXISTS DOES NOT WORK !!!!!!!!!!
-	//try {
-/* 		const check = await db.query("SELECT id FROM users WHERE email = $1", [req.body.email])
-		console.log('This is the checked info: ', check) */
-/* 		if (check) {
-			return res.status(409)
-						.send('This username or email already exists.')
-		}
-		else { */
-			try {
-				const results = await db.query("INSERT INTO users (firstname, lastname, username, age, gender_identity, gender_interest, bio, city, country, password, email) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning *", // changed the token in the Table to null for now, before we assign an actual automatically generated token
-				[ 
-					req.body.firstname, req.body.lastname, req.body.username, req.body.age, req.body.gender_identity, req.body.gender_interest, req.body.bio, req.body.city, req.body.country, hashedPassword, sanitizedEmail
-				])
-				console.log(results)
-				res.status(201)
-					.json({
-					status: "success",
-					data: {
-						user: results.rows[0]
-		/* 				firstname: "Ferocious",
-						lastname: "Cupcake", 
-						username: "SweetNSour",
-						email: "wishfor@cupcake.io", 
-						password: "eat_your_veggies_I_mean_cupcakes",
-						image: 'cupcake.jpg',
-						age: "18",
-						gender: "cupcake",
-						location: "your local bakery" */
-		/* 				actual_location: "your wildest dreams",
-						token: "sdjfvvfhsjlslslslsdls", 
-						INSERT INTO users (id, firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES (1, 'Ferocious', 'Cupcake', 'SweetNSour', 'wishfor@cupcake.io', 'Bakeria', 'Wonderland', 'eat_your_veggies_I_mean_cupcakes', 'cupcake.jpg', 18, 'cupcake', 'too sweet to handle', 'kzsgdfksvzvbd');
-						INSERT INTO users (id, firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES (2, 'Kata', 'Mata', 'UltimateHedgehog', 'hedge@hog.io', 'Local Forest', 'Wonderland', 'do_not_piss_hedges_off', 'hedgehog.jpg', 12, 'hedgehog', 'best hedgehog ever', 'kzsgdfksvzvbd');
-						INSERT INTO users (id, firstname, lastname, username, email, city, country, password, image, age, gender, bio, token) VALUES (3, 'Bobo', 'Robo', 'RattleSnake', 'rattle@snake.io', 'extinct, slaughtered by badass hedgehog', 'Wonderland', 'ban_all_hedgehogs', 'snake.jpg', 12, 'snake', 'super scared of badass killer hedgehog', 'kzsgdfksvzvbd');
-						*/
-					}
-				})
-			} catch (err) {
-				console.log(err)
+		try {
+			// !!!!!!!!!!! CHECKING IF EMAIL/USERNAME ALREADY EXISTS DOES NOT WORK !!!!!!!!!!
+/* 				const check = await db.query("SELECT * FROM users WHERE email = $1 OR username = $2", [sanitizedEmail, req.body.username])
+			if (check) {
+				return res.status(409)
+							.send('This username or email already exists.') // check is not working
 			}
+*/
+			const results = await db.query("INSERT INTO users (firstname, lastname, username, age, gender_identity, gender_interest, bio, city, country, password, email) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning *", // changed the token in the Table to null for now, before we assign an actual automatically generated token
+			[ 
+				req.body.firstname, req.body.lastname, req.body.username, req.body.age, req.body.gender_identity, req.body.gender_interest, req.body.bio, req.body.city, req.body.country, hashedPassword, sanitizedEmail
+			])
+
+			const token = jwt.sign(results.rows[0], sanitizedEmail, {
+				expiresIn: 60 * 24
+			})
+
+			console.log(results)
+			res.status(201)
+				.json({
+				token,
+				status: "success",
+				data: {
+					user: results.rows[0]
+				}
+			})
+		} catch (err) {
+			console.log(err)
 		}
-/* 	} catch (err) {
-		console.log(err)
-	} */
+	}
 )
+
+app.post("/login", async (req, res) => {
+	const sanitizedEmail = req.body.email.toLowerCase()
+
+	try {
+		const results = await db.query("SELECT * FROM users WHERE email = $1", [sanitizedEmail])
+		console.log(results)
+		if (results && await bcrypt.compare(req.body.password, results.rows[0].password)){
+			const token = jwt.sign(results.rows[0], sanitizedEmail, {
+				expiresIn: 60 * 24
+			})
+			res.status(201)
+				.json({
+				token
+/* 				status: "success",
+				sanitizedEmail */
+			})
+		}
+		res.status(400).send('Invalid login credentials.') // !!!!!!!!!! this is not working, not being displayed !!!!!!!!!!!!!
+
+	} catch (err) {
+		console.log(err)
+	}
+})
 
 app.put("/users/:id", async (req, res) => {
 	console.log(req.params.id)
