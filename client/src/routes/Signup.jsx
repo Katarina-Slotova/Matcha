@@ -2,7 +2,8 @@ import React, { useState } from "react"
 import Footer from "../components/Footer"
 import { useNavigate } from "react-router-dom"
 import { Form, FormControl, FormLabel } from "react-bootstrap"
-import axios from 'axios' 
+import axios from 'axios'
+import { useCookies } from 'react-cookie'
 
 
 const Signup = () => {
@@ -30,6 +31,7 @@ const Signup = () => {
 		email: ''
 	})
 	const [error, setError] = useState(null)
+	const [cookie, setCookie, removeCookie] = useCookies(['user'])
 
 	const handleChange = (e) => {
 		// get the value and name from the inputs
@@ -66,7 +68,9 @@ const Signup = () => {
 				password: formData.password, 
 				email: formData.email
 			})
-			console.log(response)
+
+			setCookie('AuthToken', response.data.token)
+
 			if (response.status ===  201) {
 				navigate('/dashboard') 
 			}

@@ -187,7 +187,7 @@ const UserSettings = () => {
 											<UploadImage />
 										</div>
 										<div className="photo-container">
-											<img src={formData.image} alt="profile-img" />
+											{formData.image && <img src={formData.image} alt="profile-img" />}
 										</div>
 									</section>
 								</Form>

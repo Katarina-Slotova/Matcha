@@ -20,7 +20,7 @@ const NavigationBar = () => {
 					<Navbar.Toggle aria-controls="basic-navbar-nav"/>
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="m-auto d-flex align-items-center w-100">
-							<LinkContainer to="/home">
+							<LinkContainer to="/dashboard">
 								<Nav.Link>Home</Nav.Link>
 							</LinkContainer>
 							<LinkContainer to="/matches">
@@ -48,7 +48,7 @@ const NavigationBar = () => {
 								<Button className="col btn btn-pink-moon" onClick={"#"}>Search</Button>
 							</Form>
 							<Nav.Item className="mx-3 d-none d-md-block">
-								<Navbar.Text className="fs-6">Ferocious Cupcake</Navbar.Text>
+								<Navbar.Text className="fs-6">Show Username</Navbar.Text>
 							</Nav.Item>
 							<Button size="sm" variant="secondary" onClick={navigateLanding}>
 								Log out
