@@ -22,6 +22,7 @@ const Login = ({ setToken }) => {
 			console.log(response)
 			
 			setCookie('AuthToken', response.data.token)
+			setCookie('UserId', response.data.id)
 
 			if (response.status ===  201) {
 				navigate('/dashboard') 

@@ -4,6 +4,8 @@ import NavigationBar from "../components/Navbar"
 import UploadImage from "../components/UploadImage"
 import { useNavigate } from "react-router-dom"
 import { Form, FormControl, FormLabel } from "react-bootstrap"
+import { useCookies } from 'react-cookie'
+import axios from 'axios'
 
 const UserSettings = () => {
 	const navigate = useNavigate()
@@ -17,9 +19,10 @@ const UserSettings = () => {
 	const [city, setCity] = useState(null)
 	const [country, setCountry] = useState(null)
 	const [bio, setBio] = useState(null) */
+	const [cookies, setCookie, removeCookie] = useCookies(['user'])
 	const [confirmPassword, setConfirmPassword] = useState(null)
 	const [formData, setFormData] = useState({
-		id: '',
+		id: cookies.UserId,
 		first_name: '',
 		last_name: '',
 		user_name: '',
@@ -48,17 +51,38 @@ const UserSettings = () => {
 		}))
 	}
 
-	const onSubmit = (event) => {
-		event.preventDefault()
+	const onSubmit = async (e) => {
+		e.preventDefault()
 		try {
 			if (formData.password !== confirmPassword) {
 				setError('Passwords do not match!') 
 			}
-			console.log('make post req to db')
+
+			const response = await axios.put('http://localhost:3005/settings', {
+/* 				id: formData.id,
+				firstname: formData.first_name,
+				lastname: formData.last_name, 
+				username: formData.user_name, 
+				age: formData.age, 
+				gender_identity: formData.gender_identity, 
+				gender_interest: formData.gender_interest,
+				city: formData.city, 
+				country: formData.country, 
+				password: formData.password, 
+				email: formData.email */
+				formData
+			})
+			console.log(response)
+
+			if (response.status ===  200) {
+				navigate('/profile') 
+			}
+			
+			setCookie('UserId', response.id)
+
 		} catch (error) {
 			console.log(error) 
 		}
-		navigate('/profile')
 	}
 
 	return (
@@ -76,14 +100,14 @@ const UserSettings = () => {
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="user_name">Username</FormLabel>
-													<FormControl type="text" id="user-name" name="user_name" class="form-control form-control-lg" value="" onChange={handleChange} required/>
+													<FormControl type="text" id="user-name" name="user_name" class="form-control form-control-lg" value={formData.user_name} onChange={handleChange} required/>
 												</div>
 											</div>
 
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="email">Email</FormLabel>
-													<FormControl type="email" id="email" name="email" class="form-control form-control-lg" value="" onChange={handleChange} required/>
+													<FormControl type="email" id="email" name="email" class="form-control form-control-lg" value={formData.email} onChange={handleChange} required/>
 												</div>
 											</div>
 										</div>
@@ -93,14 +117,14 @@ const UserSettings = () => {
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="password">Password</FormLabel>
-													<FormControl type="password" id="passowrd" name="password" class="form-control form-control-lg" value="" onChange={handleChange} required/>
+													<FormControl type="password" id="passowrd" name="password" class="form-control form-control-lg" value={formData.password} onChange={handleChange} required/>
 												</div>
 											</div>
 
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="password">Repeat Password</FormLabel>
-													<FormControl type="password" id="password-check" name="password-check" class="form-control form-control-lg" value="" onChange={(e) => setConfirmPassword(e.target.value)} required/>
+													<FormControl type="password" id="password-check" name="password-check" class="form-control form-control-lg" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required/>
 												</div>
 											</div>
 										</div>
@@ -109,14 +133,14 @@ const UserSettings = () => {
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="first_name">First Name</FormLabel>
-													<FormControl type="text" id="first-name" name="first_name" class="form-control form-control-lg" value="" onChange={handleChange} required/>
+													<FormControl type="text" id="first-name" name="first_name" class="form-control form-control-lg" value={formData.first_name} onChange={handleChange} required/>
 												</div>
 											</div>
 
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="last_name">Last Name</FormLabel>
-													<FormControl type="text" id="last-name" name="last_name" class="form-control form-control-lg" value="" onChange={handleChange} required/>
+													<FormControl type="text" id="last-name" name="last_name" class="form-control form-control-lg" value={formData.last_name} onChange={handleChange} required/>
 												</div>
 											</div>
 										</div>
@@ -125,7 +149,7 @@ const UserSettings = () => {
 											<div>
 												<div class="form-outline datepicker w-100">
 													<FormLabel for="age" class="form-label">Age</FormLabel>
-													<FormControl type="text" id="age" name="age" class="form-control form-control-lg" value="" onChange={handleChange} required/>
+													<FormControl type="text" id="age" name="age" class="form-control form-control-lg" value={formData.age} onChange={handleChange} required/>
 												</div>
 											</div>
 											<div>
@@ -145,13 +169,13 @@ const UserSettings = () => {
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="city">City</FormLabel>
-													<FormControl type="text" name="city" class="form-control form-control-lg" value="" onChange={handleChange} required/>
+													<FormControl type="text" name="city" class="form-control form-control-lg" value={formData.city} onChange={handleChange} required/>
 												</div>
 											</div>
 											<div>
 												<div class="form-outline">
 													<FormLabel class="form-label" for="country">Country</FormLabel>
-													<FormControl type="text" name="country" class="form-control form-control-lg" value="" onChange={handleChange} required/>
+													<FormControl type="text" name="country" class="form-control form-control-lg" value={formData.country} onChange={handleChange} required/>
 												</div>
 											</div>
 										</div>
@@ -171,7 +195,7 @@ const UserSettings = () => {
 										<div class="row">
 												<div class="form-outline">
 													<FormLabel class="form-label" for="about">About me</FormLabel>
-													<FormControl type="text" id="about" name="about" class="form-control form-control-lg" placeholder="I like long walks..." value="" onChange={handleChange} required/>
+													<FormControl type="text" id="bio" name="bio" class="form-control form-control-lg" placeholder="I like long walks..." value={formData.bio} onChange={handleChange} required/>
 												</div>
 										</div>
 

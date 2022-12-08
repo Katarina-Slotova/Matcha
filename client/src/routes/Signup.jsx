@@ -17,8 +17,10 @@ const Signup = () => {
 	const [age, setAge] = useState(null)
 	const [city, setCity] = useState(null)
 	const [country, setCountry] = useState(null) */
+	const [cookies, setCookie, removeCookie] = useCookies(['user'])
 	const [confirmPassword, setConfirmPassword] = useState()
 	const [formData, setFormData] = useState({
+/* 		user_id: cookies.UserId, */
 		first_name: '',
 		last_name: '',
 		user_name: '',
@@ -31,7 +33,6 @@ const Signup = () => {
 		email: ''
 	})
 	const [error, setError] = useState(null)
-	const [cookie, setCookie, removeCookie] = useCookies(['user'])
 
 	const handleChange = (e) => {
 		// get the value and name from the inputs
@@ -70,6 +71,7 @@ const Signup = () => {
 			})
 
 			setCookie('AuthToken', response.data.token)
+			/* setCookie('UserId', response.data.data.user.id) */
 
 			if (response.status ===  201) {
 				navigate('/dashboard') 

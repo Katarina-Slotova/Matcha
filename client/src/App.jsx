@@ -1,6 +1,5 @@
 import React, {useState} from "react"
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
-import Home from "./routes/Home"
 import Landing from "./routes/Landing"
 import Matches from "./routes/Matches"
 import Profile from "./routes/Profile"
@@ -29,7 +28,7 @@ const App = () => {
 				<Router>
 					<Routes>
 						<Route path="/" element={<Landing />}></Route>
-						<Route path="/home" element={<Home />}></Route>
+						<Route path="/dashboard" element={<Dashboard />}></Route>
 						<Route path="/matches" element={<Matches />}></Route>
 						<Route path="/profile" element={<Profile />}></Route>
 						<Route path="/settings" element={<UserSettings />}></Route>

@@ -16,7 +16,7 @@ const NavigationBar = () => {
 		<div>
 			<Navbar className="justify-content-center" collapseOnSelect bg="black" variant="dark" expand="sm" sticky="top">
 				<Container fluid>
-					<Navbar.Brand><a href="/home"><img src="matcha-logo-dark.png" width="30" height="30" className="d-inline-block align-top" alt="matcha-logo"></img></a></Navbar.Brand>
+					<Navbar.Brand><a href="/dashboard"><img src="matcha-logo-dark.png" width="30" height="30" className="d-inline-block align-top" alt="matcha-logo"></img></a></Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav"/>
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="m-auto d-flex align-items-center w-100">
