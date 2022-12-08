@@ -115,3 +115,4 @@ PGPORT=5432
 - install react cookie for frontend: npm install react-cookie
 - cookies created upon signup and log in
 - login works when connected to db
+- updating user's settings work, db is updated accordingly
