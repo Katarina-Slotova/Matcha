@@ -35,11 +35,11 @@ app.get("/dashboard", async (req, res) => {
 })
 
 // Find one specific user with route handler
-app.get("/users/:id", async (req, res) => {
-	console.log(req.params.id)
+app.get("/user", async (req, res) => {
+	
 	try {
 		// always use parameterized queries (queries with $ as placeholder and passing variables in an array to it) in order to prevent SQL injections
-		const results = await db.query("SELECT * FROM users WHERE id = $1", [req.params.id])
+		const results = await db.query("SELECT * FROM users WHERE id = $1", [req.query.id])
 		//console.log(user.rows[0])
 		res.status(200).json({
 			status: "success",
