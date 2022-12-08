@@ -116,3 +116,4 @@ PGPORT=5432
 - cookies created upon signup and log in
 - login works when connected to db
 - updating user's settings work, db is updated accordingly
+- get one single user by id (id obtained from cookies) -> not working, query returning rowCount 0
