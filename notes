@@ -117,3 +117,7 @@ PGPORT=5432
 - login works when connected to db
 - updating user's settings work, db is updated accordingly
 - get one single user by id (id obtained from cookies) -> not working, query returning rowCount 0
+
+- issue with getting one user still not resolved (showing user undefinied)
+- clear cookies upon logout
+- get username in navbar
