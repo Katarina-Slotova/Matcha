@@ -39,7 +39,7 @@ app.get("/user", async (req, res) => {
 	
 	try {
 		// always use parameterized queries (queries with $ as placeholder and passing variables in an array to it) in order to prevent SQL injections
-		const results = await db.query("SELECT * FROM users WHERE id = $1", [req.query.id])
+		const results = await db.query("SELECT * FROM users WHERE id = $1", [req.query.userId])
 		//console.log(user.rows[0])
 		res.status(200).json({
 			status: "success",
