@@ -70,7 +70,7 @@ const Dashboard = () => {
 
 	return (
 		<>
-			<NavigationBar />
+			<NavigationBar user={user} />
 			<div className="dashboard">
 				<ChatContainer />
 				<div className="swipe-container">

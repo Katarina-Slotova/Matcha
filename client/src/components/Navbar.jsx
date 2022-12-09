@@ -2,13 +2,16 @@ import React from "react"
 import { Container, Nav, Navbar, Button, Form, NavDropdown } from "react-bootstrap"
 import { LinkContainer } from "react-router-bootstrap"
 import { useNavigate } from "react-router-dom"
+import { useCookies } from 'react-cookie'
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const NavigationBar = () => {
-
+const NavigationBar = ({ user }) => {
 	const navigate = useNavigate()
+	const [cookies, setCookie, removeCookie] = useCookies(['user'])
 
-	const navigateLanding = () => {
+	const logout = () => {
+		removeCookie('UserId', cookies.UserId)
+		removeCookie('AuthToken', cookies.AuthToken)
 		navigate('/')
 	}
 
@@ -48,9 +51,9 @@ const NavigationBar = () => {
 								<Button className="col btn btn-pink-moon" onClick={"#"}>Search</Button>
 							</Form>
 							<Nav.Item className="mx-3 d-none d-md-block">
-								<Navbar.Text className="fs-6">Show Username</Navbar.Text>
+								<Navbar.Text className="fs-6">{user.data.user.username}</Navbar.Text>
 							</Nav.Item>
-							<Button size="sm" variant="secondary" onClick={navigateLanding}>
+							<Button size="sm" variant="secondary" onClick={logout}>
 								Log out
 							</Button>
 						</Nav>
