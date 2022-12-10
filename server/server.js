@@ -34,13 +34,31 @@ app.get("/dashboard", async (req, res) => {
 	}
 })
 
+// Find all the users that correspond to the gender interest of the user currently logged in
+app.get("/gendered-users", async (req, res) => {
+	
+	try {
+		// always use parameterized queries (queries with $ as placeholder and passing variables in an array to it) in order to prevent SQL injections
+		//console.log(req)
+		const results = await db.query("SELECT * FROM users WHERE gender_identity = $1", [req.query.gender])
+		res.status(200).json({
+			status: "success",
+			results: results.rows.length,
+			data: {
+				users: results.rows,
+			}
+		})
+	} catch (err) {
+		console.log(err)
+	}
+})
+
 // Find one specific user with route handler
 app.get("/user", async (req, res) => {
 	
 	try {
 		// always use parameterized queries (queries with $ as placeholder and passing variables in an array to it) in order to prevent SQL injections
 		const results = await db.query("SELECT * FROM users WHERE id = $1", [req.query.userId])
-		//console.log(user.rows[0])
 		res.status(200).json({
 			status: "success",
 			data: {
