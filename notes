@@ -121,3 +121,6 @@ PGPORT=5432
 - issue with getting one user still not resolved (showing user undefinied)
 - clear cookies upon logout
 - get username in navbar
+
+- tried to add selecting potential matches by gender interest of the logged in user but it's not working,
+cannot get the gender_interest of the logged in user, so it's not possible to filter the potential matches
