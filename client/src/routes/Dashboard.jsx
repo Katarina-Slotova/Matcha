@@ -70,7 +70,7 @@ const Dashboard = () => {
 
 	return (
 		<>
-			<NavigationBar user={user} />
+			{user ? <NavigationBar user={user} /> : <p></p> }
 			<div className="dashboard">
 				<ChatContainer />
 				<div className="swipe-container">
