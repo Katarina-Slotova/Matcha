@@ -3,20 +3,21 @@
 - installed PostreSQL on my laptop from https://www.postgresql.org/download/
 - install POSTRGES ON SCHOOL'S MAC with BREW: https://wiki.postgresql.org/wiki/Homebrew
 - BASIC POSTGRES COMMANDS (useful source to learn about postgres: https://www.postgresqltutorial.com/):
-	- list all the databases: \l
-	- create db: CREATE DATABASE name_of_db;
-	- connect to db: \c name_of_db;
-	- list all the tables in db: \d
-	- see the columns of specific table: \d name_of_table;
-	- modify a table by adding a column: ALTER TABLE name_of_table ADD COLUMN name_of_new_column data_type;
-	- modify a table by removing a column: ALTER TABLE name_of_table DROP COLUMN name_of_new_column;
- 
+
+  - list all the databases: \l
+  - create db: CREATE DATABASE name_of_db;
+  - connect to db: \c name_of_db;
+  - list all the tables in db: \d
+  - see the columns of specific table: \d name_of_table;
+  - modify a table by adding a column: ALTER TABLE name_of_table ADD COLUMN name_of_new_column data_type;
+  - modify a table by removing a column: ALTER TABLE name_of_table DROP COLUMN name_of_new_column;
+
 - created basic db structure; don't know yet how to create the db itself automatically with PostgreSQL
 - created basic server configuration:
-	- installed node for backend (npm init)
-	- installed express (npm install express) for backend
-	- installed dotenv (npm install dotenv) for backend, in order to be able to use environment variables (https://www.npmjs.com/package/dotenv - usage instructions are here, but also in the tutorial)
-	- install nodemon to automatically monitor any changes in server.js (npm install nodemon)
+  - installed node for backend (npm init)
+  - installed express (npm install express) for backend
+  - installed dotenv (npm install dotenv) for backend, in order to be able to use environment variables (https://www.npmjs.com/package/dotenv - usage instructions are here, but also in the tutorial)
+  - install nodemon to automatically monitor any changes in server.js (npm install nodemon)
 - make a test home page on localhost with mock data in json format
 - make a test signup page on localhost with mock data in json format
 - make a test page for finding one specific user on localhost with mock data in json format
@@ -55,47 +56,48 @@
 - installed cors (npm install cors)
 
 Put these into postman at aschool for testing purposes
+
 1. Create a get request to get all the users: http://localhost:3005/home
 2. Create a get request to get one user: http://localhost:3005/users/2
 3. Create a post request to create a user: http://localhost:3005/signup
-{
-    "firstname": "Fast",
-    "lastname": "Sloth",
-    "username": "ChillinChiller",
-    "email": "sloth@chill.io",
-    "city": "Zootropolis",
-    "country": "Wonderland",
-    "password": "chill_the_heck_out",
-    "image": "sloth.jpg",
-    "age": "99",
-    "gender": "sloth",
-    "bio": "too fast to handle",
-    "token": "sdjfvvfhsjlslslslsdls"
-}
+   {
+   "firstname": "Fast",
+   "lastname": "Sloth",
+   "username": "ChillinChiller",
+   "email": "sloth@chill.io",
+   "city": "Zootropolis",
+   "country": "Wonderland",
+   "password": "chill_the_heck_out",
+   "image": "sloth.jpg",
+   "age": "99",
+   "gender": "sloth",
+   "bio": "too fast to handle",
+   "token": "sdjfvvfhsjlslslslsdls"
+   }
 4. Create a out request to modify user info:
-{
-    "firstname": "Fast",
-    "lastname": "Sloth",
-    "username": "ChillinChiller",
-    "email": "sloth@chill.io",
-    "city": "Zootropolis",
-    "country": "Wonderland",
-    "password": "chill_the_heck_out",
-    "image": "sloth.jpg",
-    "age": "100",
-    "gender": "sloth",
-    "bio": "too fast to handle"
-}
+   {
+   "firstname": "Fast",
+   "lastname": "Sloth",
+   "username": "ChillinChiller",
+   "email": "sloth@chill.io",
+   "city": "Zootropolis",
+   "country": "Wonderland",
+   "password": "chill_the_heck_out",
+   "image": "sloth.jpg",
+   "age": "100",
+   "gender": "sloth",
+   "bio": "too fast to handle"
+   }
 5. Delete a user: http://localhost:3005/users/5
 
 - create settings page
 - modify signup page
-- add button to profile page 
+- add button to profile page
 - modify style.css (parts that relate to signup and settings pages)
 - change sexual orinatation to gender interest
-PORT=3005
+  PORT=3005
 
-PGUSER=postgres 
+PGUSER=postgres
 PGHOST=localhost
 PGPASSWORD=123456
 PGDATABASE=matchadb
@@ -123,4 +125,6 @@ PGPORT=5432
 - get username in navbar
 
 - tried to add selecting potential matches by gender interest of the logged in user but it's not working,
-cannot get the gender_interest of the logged in user, so it's not possible to filter the potential matches
+  cannot get the gender_interest of the logged in user, so it's not possible to filter the potential matches
+
+TESTING
