@@ -69,6 +69,23 @@ app.get("/user", async (req, res) => {
 	}
 })
 
+app.post("/addmatch", async (req, res) => {
+	const { userId, matchedUserId } = req.body
+
+	try {
+		// always use parameterized queries (queries with $ as placeholder and passing variables in an array to it) in order to prevent SQL injections
+		const results = await db.query("INSERT INTO matches (user1, user2) VALUES ($1, $2) returning *", [userId, matchedUserId])
+		res.status(201).json({
+			status: "success",
+			data: {
+				match: results.rows[0]
+			}
+		})
+	} catch (err) {
+		console.log(err)
+	}
+})
+
 
 // create user with route handler
 // the info sent in the requst will be saved in "body" & converted to JS object -- for that, we need to use middleware express.json() => see the top of the file; without this middleware, the body would be undefined

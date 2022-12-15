@@ -76,10 +76,23 @@ const Dashboard = () => {
 	console.log('selected users', genderedUsers) */
 
 	const characters = db
-  
-	const swiped = (direction, nameToDelete) => {
-	  console.log('removing: ' + nameToDelete)
-	  setLastDirection(direction)
+	
+	const updateMatches = async (matchedUserId) => {
+		try {
+			await axios.post('http://localhost:3005/addmatch', {
+				userId, 
+				matchedUserId
+			})
+		} catch (err) {
+			console.log(err)
+		}
+	} 
+
+	const swiped = (direction, swipedUserId ) => {
+		if(direction === 'right'){
+			updateMatches(swipedUserId)
+		}
+		setLastDirection(direction)
 	}
   
 	const outOfFrame = (name) => {
@@ -97,7 +110,7 @@ const Dashboard = () => {
 						</div>
 					<div className="card-container">
 						{user && genderedUsers ? genderedUsers.map((character) =>
-							<TinderCard key={character.username} onSwipe={(dir) => swiped(dir, character.username)} onCardLeftScreen={() => outOfFrame(character.username)}>
+							<TinderCard key={character.username} onSwipe={(dir) => swiped(dir, character.id)} onCardLeftScreen={() => outOfFrame(character.username)}>
 								<div>
 									<ListGroup className="list-group-flush user-info">
 								<div style={{ backgroundImage: 'url(' + character.image + ')' }} className='user-card'>
