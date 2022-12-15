@@ -17,7 +17,7 @@ app.use(cors())
 app.use(express.json())
 
 // Access home page with route handler
-app.get("/dashboard", async (req, res) => {
+/* app.get("/dashboard", async (req, res) => {
 	try {
 		const results = await db.query("SELECT * FROM users") // returns a promise
 		console.log(results)
@@ -32,18 +32,17 @@ app.get("/dashboard", async (req, res) => {
 	} catch (err) {
 		console.log(err)
 	}
-})
+}) */
 
 // Find all the users that correspond to the gender interest of the user currently logged in
 app.get("/gendered-users", async (req, res) => {
-	
+	console.log(req.query.gender)
 	try {
 		// always use parameterized queries (queries with $ as placeholder and passing variables in an array to it) in order to prevent SQL injections
 		//console.log(req)
 		const results = await db.query("SELECT * FROM users WHERE gender_identity = $1", [req.query.gender])
 		res.status(200).json({
 			status: "success",
-			results: results.rows.length,
 			data: {
 				users: results.rows,
 			}

@@ -41,8 +41,9 @@ const Dashboard = () => {
 	const getUser = async () => {
 		try {
 			const results = await axios.get('http://localhost:3005/user', {
-				params: {userId}
+				params: { userId }
 			})
+			console.log(results.data)
 			setUser(results.data)
 		}
 		catch (err) {
@@ -52,11 +53,11 @@ const Dashboard = () => {
 	
 	const getUsersByGender = async () => {
 		try {	
-			console.log(user)
 			const results = await axios.get('http://localhost:3005/gendered-users', {
-				params: { gender: user?.gender_identity }
+				params: { gender: 'man' }
 			})
-			setGenderedUsers(results.data)
+			console.log("This is gendered users", results.data)
+			setGenderedUsers(results.data.users)
 		}
 		catch (err) {
 			console.log(err)
@@ -70,9 +71,9 @@ const Dashboard = () => {
 	//}, [user, genderedUsers])
 	}, [])
 
-	console.log('id', userId)
+/* 	console.log('id', userId)
 	console.log('user', user)
-	console.log('selected users', genderedUsers)
+	console.log('selected users', genderedUsers) */
 
 	const characters = db
   
@@ -95,12 +96,12 @@ const Dashboard = () => {
 							{lastDirection ? <p>You liked this user! Check out your matches for more info.</p> : <p></p>}
 						</div>
 					<div className="card-container">
-						{user && genderedUsers ? characters.map((character) =>
-							<TinderCard key={character.name} onSwipe={(dir) => swiped(dir, character.name)} onCardLeftScreen={() => outOfFrame(character.name)}>
+						{user && genderedUsers ? genderedUsers.map((character) =>
+							<TinderCard key={character.username} onSwipe={(dir) => swiped(dir, character.username)} onCardLeftScreen={() => outOfFrame(character.username)}>
 								<div>
 									<ListGroup className="list-group-flush user-info">
-								<div style={{ backgroundImage: 'url(' + character.url + ')' }} className='user-card'>
-									<h3>{character.name}</h3>
+								<div style={{ backgroundImage: 'url(' + character.image + ')' }} className='user-card'>
+									<h3>{character.username}</h3>
 								</div>
 										{/* <ListGroup.Item><Card.Link className='link' href="/profile">User's Name</Card.Link></ListGroup.Item> */}
 										<ListGroup.Item>Location</ListGroup.Item>
