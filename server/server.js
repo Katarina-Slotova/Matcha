@@ -25,49 +25,10 @@ app.get('/users', async (req, res) => {
       status: 'success',
       results: results.rows.length,
       // structure response to the frontend using "data" -- frontend knows to look for "data" field in the payload, where all the data is stored
-      data: {
-        // results: results.rows,
-        users: results.rows,
-      },
-    })
-  } catch (err) {
-    console.log(err)
-  }
-})
-
-// Access home page with route handler
-app.get('/dashboard', async (req, res) => {
-  try {
-    const results = await db.query('SELECT * FROM users WHERE id===') // returns a promise
-    console.log(results)
-    res.status(200).json({
-      status: 'success',
-      results: results.rows.length,
-      // structure response to the frontend using "data" -- frontend knows to look for "data" field in the payload, where all the data is stored
-      data: {
-        results: results.rows,
-      },
-    })
-  } catch (err) {
-    console.log(err)
-  }
-})
-
-// Find all the users that correspond to the gender interest of the user currently logged in
-app.get('/gendered-users', async (req, res) => {
-  try {
-    // always use parameterized queries (queries with $ as placeholder and passing variables in an array to it) in order to prevent SQL injections
-    //console.log(req)
-    const results = await db.query(
-      'SELECT * FROM users WHERE gender_identity = $1',
-      [req.query.gender]
-    )
-    res.status(200).json({
-      status: 'success',
-      results: results.rows.length,
-      data: {
-        users: results.rows,
-      },
+      // data: {
+      // results: results.rows,
+      users: results.rows,
+      // },
     })
   } catch (err) {
     console.log(err)
@@ -75,22 +36,79 @@ app.get('/gendered-users', async (req, res) => {
 })
 
 // Find one specific user with route handler
-app.get('/user', async (req, res) => {
+app.get('/users/:id', async (req, res) => {
   try {
     // always use parameterized queries (queries with $ as placeholder and passing variables in an array to it) in order to prevent SQL injections
     const results = await db.query('SELECT * FROM users WHERE id = $1', [
-      req.query.userId,
+      req.params.id,
     ])
     res.status(200).json({
       status: 'success',
-      data: {
-        user: results.rows[0],
-      },
+      // data: {
+      user: results.rows,
+      // },
     })
   } catch (err) {
     console.log(err)
   }
 })
+
+// Access home page with route handler
+// app.get('/dashboard', async (req, res) => {
+// try {
+//   const results = await db.query('SELECT * FROM users') // returns a promise
+//   console.log(results)
+//   res.status(200).json({
+//     status: 'success',
+//     results: results.rows.length,
+//     // structure response to the frontend using "data" -- frontend knows to look for "data" field in the payload, where all the data is stored
+//     data: {
+//       results: results.rows,
+//     },
+//   })
+// } catch (err) {
+//   console.log(err)
+// }
+// })
+
+// // Find all the users that correspond to the gender interest of the user currently logged in
+// app.get('/gendered-users', async (req, res) => {
+//   try {
+//     // always use parameterized queries (queries with $ as placeholder and passing variables in an array to it) in order to prevent SQL injections
+//     //console.log(req)
+//     const results = await db.query(
+//       'SELECT * FROM users WHERE gender_identity = $1',
+//       [req.query.gender]
+//     )
+//     res.status(200).json({
+//       status: 'success',
+//       results: results.rows.length,
+//       data: {
+//         users: results.rows,
+//       },
+//     })
+//   } catch (err) {
+//     console.log(err)
+//   }
+// })
+
+// // Find one specific user with route handler
+// app.get('/user', async (req, res) => {
+//   try {
+//     // always use parameterized queries (queries with $ as placeholder and passing variables in an array to it) in order to prevent SQL injections
+//     const results = await db.query('SELECT * FROM users WHERE id = $1', [
+//       req.query.userId,
+//     ])
+//     res.status(200).json({
+//       status: 'success',
+//       data: {
+//         user: results.rows[0],
+//       },
+//     })
+//   } catch (err) {
+//     console.log(err)
+//   }
+// })
 
 // create user with route handler
 // the info sent in the requst will be saved in "body" & converted to JS object -- for that, we need to use middleware express.json() => see the top of the file; without this middleware, the body would be undefined
@@ -155,13 +173,9 @@ app.post('/login', async (req, res) => {
       results &&
       (await bcrypt.compare(req.body.password, results.rows[0].password))
     ) {
-      const token = jwt.sign(results.rows[0], sanitizedEmail, {
-        expiresIn: 60 * 24,
-      })
       res.status(201).json({
-        token,
         status: 'success',
-        id: results.rows[0].id,
+        user: results.rows[0],
       })
     }
     res.status(400).send('Invalid login credentials.') // !!!!!!!!!! this is not working, not being displayed !!!!!!!!!!!!!
@@ -170,54 +184,54 @@ app.post('/login', async (req, res) => {
   }
 })
 
-app.put('/settings', async (req, res) => {
-  console.log(req.body)
-  const formData = req.body.formData
-  const hashedPassword = await bcrypt.hash(formData.password, 10)
-  const sanitizedEmail = formData.email.toLowerCase()
+// app.put('/settings', async (req, res) => {
+//   console.log(req.body)
+//   const formData = req.body.formData
+//   const hashedPassword = await bcrypt.hash(formData.password, 10)
+//   const sanitizedEmail = formData.email.toLowerCase()
 
-  try {
-    const results = await db.query(
-      'UPDATE users SET firstname = $1, lastname = $2, username = $3, age = $4, gender_identity = $5, gender_interest = $6, bio = $7, city = $8, country = $9, password = $10, email = $11 WHERE id = $12 returning *',
-      [
-        formData.first_name,
-        formData.last_name,
-        formData.user_name,
-        formData.age,
-        formData.gender_identity,
-        formData.gender_interest,
-        formData.bio,
-        formData.city,
-        formData.country,
-        hashedPassword,
-        sanitizedEmail,
-        formData.id,
-      ]
-    )
-    console.log(results)
-    res.status(200).json({
-      status: 'success',
-      data: {
-        user: results.rows[0],
-      },
-    })
-  } catch (err) {
-    console.log(err)
-  }
-})
+//   try {
+//     const results = await db.query(
+//       'UPDATE users SET firstname = $1, lastname = $2, username = $3, age = $4, gender_identity = $5, gender_interest = $6, bio = $7, city = $8, country = $9, password = $10, email = $11 WHERE id = $12 returning *',
+//       [
+//         formData.first_name,
+//         formData.last_name,
+//         formData.user_name,
+//         formData.age,
+//         formData.gender_identity,
+//         formData.gender_interest,
+//         formData.bio,
+//         formData.city,
+//         formData.country,
+//         hashedPassword,
+//         sanitizedEmail,
+//         formData.id,
+//       ]
+//     )
+//     console.log(results)
+//     res.status(200).json({
+//       status: 'success',
+//       data: {
+//         user: results.rows[0],
+//       },
+//     })
+//   } catch (err) {
+//     console.log(err)
+//   }
+// })
 
-app.delete('/users/:id', async (req, res) => {
-  try {
-    const results = await db.query('DELETE FROM users WHERE id = $1', [
-      req.params.id,
-    ])
-    res.status(204).json({
-      status: 'success',
-    })
-  } catch (err) {
-    console.log(err)
-  }
-})
+// app.delete('/users/:id', async (req, res) => {
+//   try {
+//     const results = await db.query('DELETE FROM users WHERE id = $1', [
+//       req.params.id,
+//     ])
+//     res.status(204).json({
+//       status: 'success',
+//     })
+//   } catch (err) {
+//     console.log(err)
+//   }
+// })
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {

@@ -1,15 +1,15 @@
-import TinderCard from 'react-tinder-card'
-import Card from 'react-bootstrap/Card'
-import ListGroup from 'react-bootstrap/ListGroup'
+// import TinderCard from 'react-tinder-card'
+// import Card from 'react-bootstrap/Card'
+// import ListGroup from 'react-bootstrap/ListGroup'
 import { useState, useEffect } from 'react'
-import ChatContainer from '../components/ChatContainer'
-import NavigationBar from '../components/Navbar'
+// import ChatContainer from '../components/ChatContainer'
+// import NavigationBar from '../components/Navbar'
 import Footer from '../components/Footer'
-import axios from 'axios'
-import { useCookies } from 'react-cookie'
+// import axios from 'axios'
 import { useSelector } from 'react-redux'
 import UserList from '../components/UserList'
-import getUser from '../reducers/userReducer'
+// import initializeUser from '../reducers/userReducer'
+// import { useMatch } from 'react-router-dom'
 
 // const db = [
 // 	{
@@ -36,16 +36,16 @@ import getUser from '../reducers/userReducer'
 
 const Dashboard = () => {
   const users = useSelector(({ users }) => users)
+  const user = useSelector(({ user }) => user)
   // const [user, setUser] = useState()
   const [lastDirection, setLastDirection] = useState()
-  const [cookies, setCookie, removeCookie] = useCookies(['user'])
   // const [genderedUsers, setGenderedUsers] = useState()
-
-  const userId = cookies.UserId
-  console.log(userId)
-  console.log(`users in dashboard: ${users}`)
-  const user = getUser(userId)
-  console.log(`user in dashboard: ${user}`)
+  // console.log(userId)
+  console.log(`users in dashboard: ${users[0]}`)
+  // console.log(`userId in dashboard: ${userId}`)
+  // console.log(`lastDir in dashboard: ${lastDirection}`)
+  // const user = getUser(userId)
+  // console.log(`user in dashboard: ${users}`)
   // const getUser = async () => {
   //   try {
   //     const results = await axios.get('http://localhost:3005/user', {
@@ -57,6 +57,7 @@ const Dashboard = () => {
   //   }
   // }
 
+  console.log(`user in dashboard: ${user}`)
   // const getUsersByGender = async () => {
   //   try {
   //     console.log(user)
@@ -93,12 +94,13 @@ const Dashboard = () => {
 
   return (
     <>
-      <p>heh in dashboard!</p>
+      <p>heh {user.id} in dashboard!</p>
       {/* {user && genderedUsers ? <NavigationBar user={user} /> : <p></p>} */}
       <UserList />
-      <div className="dashboard">
-        {/* <ChatContainer /> */}
-        {/* <div className="swipe-container">
+      {/* <div className="dashboard"> */}
+      <p>hei</p>
+      {/* <ChatContainer /> */}
+      {/* <div className="swipe-container">
           <div className="like-info">
             {lastDirection ? (
               <p>You liked this user! Check out your matches for more info.</p>
@@ -124,8 +126,8 @@ const Dashboard = () => {
                       >
                         <h3>{character.name}</h3>
                       </div> */}
-        {/* <ListGroup.Item><Card.Link className='link' href="/profile">User's Name</Card.Link></ListGroup.Item> */}
-        {/* <ListGroup.Item>Location</ListGroup.Item>
+      {/* <ListGroup.Item><Card.Link className='link' href="/profile">User's Name</Card.Link></ListGroup.Item> */}
+      {/* <ListGroup.Item>Location</ListGroup.Item>
                       <ListGroup.Item>Interests</ListGroup.Item>
                       <ListGroup.Item>Hashtags</ListGroup.Item>
                       <ListGroup.Item>Fame rate</ListGroup.Item>
@@ -138,7 +140,7 @@ const Dashboard = () => {
             )}
           </div>
         </div> */}
-      </div>
+      {/* </div> */}
       <hr />
       <Footer />
     </>

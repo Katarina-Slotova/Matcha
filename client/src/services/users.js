@@ -11,18 +11,20 @@ const getAll = async () => {
   // console.log(response.data.data.users)
   // console.log(`versus response:`)
   // console.log(response)
-  return response.data.data.users
+  return response.data.users
 }
 
-const getUser = async () => {
-  const response = await axios.get(`${baseUrl}/:id`)
+const getUser = async (userId) => {
+  // const response = await axios.get(`${baseUrl}/:id`)
+  const response = await axios.get(`${baseUrl}/${userId}`)
   // const response = await Matcha.get(baseUrl)
   // const response = await Matcha.get('/users')
-  console.log(`in getUser users.js there is response: ${response}`)
+  // console.log(`in getUser users.js there is response: ${response}`)
+  // console.log(`in getUser it is: ${response.data.user[0].firstname}`)
   // console.log(response.data.data.users)
   // console.log(`versus response:`)
   // console.log(response)
-  return response.data.data.users
+  return response.data.user[0]
 }
 
 // const createNew = async (content) => {
