@@ -17,14 +17,6 @@ const App = () => {
 	const [cookies, setCookie, removeCookie] = useCookies(['user'])
 	const authToken = cookies.AuthToken
 
-	const login = (user) => {
-		setUser(user)
-		setMessage(`welcome ${user}`)
-		setTimeout(() => {
-			setMessage(null)
-		}, 5000)
-	}
-
 	return (
 		<UsersContextProvider>
 			<div>
@@ -35,7 +27,7 @@ const App = () => {
 						{authToken && <Route path="/matches" element={<Matches />}></Route>}
 						{authToken && <Route path="/profile" element={<Profile />}></Route>}
 						{authToken && <Route path="/settings" element={<UserSettings />}></Route>}
-						<Route path="/login" element={<Login onLogin={login}/>}></Route>
+						<Route path="/login" element={<Login />}></Route>
 						<Route path="/signup" element={<Signup />}></Route>
 					</Routes>
 				</Router>

@@ -35,13 +35,13 @@ const NavigationBar = ({ user }) => {
 							<LinkContainer to="/settings">
 								<Nav.Link>Settings</Nav.Link>
 							</LinkContainer>
-							<NavDropdown title={<i class="fas fa-bell"></i>} menuVariant="dark" id="basic-nav-dropdown">
-								<NavDropdown.Item class="dropdown-item text-wrap" target="_blank" rel="nofollow">
-									<p class="small text-uppercase mb-2">21/11/2022</p>
+							<NavDropdown title={<i className="fas fa-bell"></i>} menuVariant="dark" id="basic-nav-dropdown">
+								<NavDropdown.Item className="dropdown-item text-wrap" target="_blank" rel="nofollow">
+									<p className="small text-uppercase mb-2">21/11/2022</p>
 									<p>You have a new match!</p>
 								</NavDropdown.Item>
-								<NavDropdown.Item class="dropdown-item text-wrap" target="_blank" rel="nofollow">
-									<p class="small text-uppercase mb-2">21/11/2022</p>
+								<NavDropdown.Item className="dropdown-item text-wrap" target="_blank" rel="nofollow">
+									<p className="small text-uppercase mb-2">21/11/2022</p>
 									<p>You have a new match!</p>
 								</NavDropdown.Item>
 							</NavDropdown>
